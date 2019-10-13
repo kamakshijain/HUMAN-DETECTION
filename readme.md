@@ -1,6 +1,7 @@
 # C++ Boilerplate
 [![Build Status](https://travis-ci.org/kamakshijain/HUMAN-DETECTION.svg?branch=master)](https://travis-ci.org/kamakshijain/HUMAN-DETECTION)
 [![Coverage Status](https://coveralls.io/repos/github/kamakshijain/HUMAN-DETECTION/badge.svg?branch=master)](https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=master)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
 
 ## Overview
@@ -24,12 +25,12 @@ In the training dataset, by using the HOG features descriptor, which will genera
 
 ## Dependencies
 
-# UPDATING UBUNTU
+### UPDATING UBUNTU
 ```
 sudo apt-get update
 sudo apt-get upgrade
 ```
-# INSTALL DEPENDENCIES
+### INSTALL DEPENDENCIES
 ```
 sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
 
@@ -37,7 +38,7 @@ sudo apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
 
 sudo apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev
 ```
-# GET OPEN CV
+### GET OPEN CV
 
 ```
 git clone https://github.com/opencv/opencv.git
@@ -67,13 +68,22 @@ sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
 sudo ldconfig
 ```
 
-# CHECKING THE PACKAGE VERSION
+### CHECKING THE PACKAGE VERSION
 
 ```
 pkg-config --modversion opencv
 ```
 
+## LICENSE
+### Copyright <2019> <Kamakshi Jain> <Sayan Brahma>
+```
 
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
 
 ## Standard install via command-line
 ```
