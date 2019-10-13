@@ -5,7 +5,8 @@
 
 ## Overview
 
-
+Human (N>=1) obstacle detector. 
+This module outputs location info in a robot's reference frame using images from [INRIA Person Dataset](http://pascal.inrialpes.fr/data/human/).
 
 
 ## AIP Logs
