@@ -5,8 +5,17 @@
 
 ## Overview
 
-Human (N>=1) obstacle detector. 
-This module outputs location info in a robot's reference frame using images from [INRIA Person Dataset](http://pascal.inrialpes.fr/data/human/).
+During catastrophe, natural or man-made, collapsing buildings, landslide or crater is a common phenomenon and many people are deployed to make quick decisions, and try to get victims to safely at their own risk. They must determine the location of victims as quickly as possible so that medics and firefighters can enter the disaster area and save victims. For the last few years, mobile robots have been proposed to help them and to perform tasks that neither humans, dogs nor existing tools can do.
+
+This project should ideally consist of sensors, camera, controls system, and actuators. Sensors should help with speed and obstacle avoidance while maneuvering. The camera should capture frames which will be used in the perception module to detect humans and give position of the human wrt robot. Co-ordinates of the human should be fed to the control system which in turn would actuate the robot to reach the human by continuously adjusting its alignment according to the motion planning module.
+
+For this project, we will be focusing on the perception part of the robot to generate an algorithm to accurately detect and send a location of the human in robot’s frame of reference. Here the robot’s reference point will be considered to be the center pixel of the image and the location of the human will be the central pixel of the bounding box around the human. We would like to generate the location of the human with respect to the robot as the output so that the robot can be given the navigation commands or instructions accordingly. 
+
+We have planned to use the [INRIA Person Dataset](http://pascal.inrialpes.fr/data/human/) for getting the training and testing data and OpenCV library, which is covered under the 3-clause BSD License third party computer vision library for all the image related work with C++ as our coding language. Any other library if required, later on, will be added with permission. We would want the permission to go for any better algorithm apart from the ones decided for the project, which might be easy to implement, if discovered within the duration of the project. 
+
+In the training dataset, by using the HOG features descriptor, which will generate a dense gradient orientation in the localized portion of the image based on occurrence, we will train the SVM classifier to output an optimal hyperplane that will categorize new examples based on the trained ones. After the SVM is being trained, it will be used on the test images to find the accuracy of the model in detecting a human. Finally, using this algorithm we get the location of the human with respect to the robot reference frame. 
+
+
 
 
 ## AIP Logs
