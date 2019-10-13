@@ -1,18 +1,73 @@
 # C++ Boilerplate
-[![Build Status](https://travis-ci.org/dpiet/cpp-boilerplate.svg?branch=master)](https://travis-ci.org/dpiet/cpp-boilerplate)
-[![Coverage Status](https://coveralls.io/repos/github/dpiet/cpp-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/dpiet/cpp-boilerplate?branch=master)
+[![Build Status](https://travis-ci.org/kamakshijain/HUMAN-DETECTION.svg?branch=master)](https://travis-ci.org/kamakshijain/HUMAN-DETECTION)
+[![Coverage Status](https://coveralls.io/repos/github/kamakshijain/HUMAN-DETECTION/badge.svg?branch=master)](https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=master)
 ---
 
 ## Overview
 
-Simple starter C++ project with:
 
-- cmake
-- googletest
+
+
+## AIP Logs
+[AIP Spreadsheet](https://docs.google.com/spreadsheets/d/1HgRF67QFG2dfj0phShHm68qmcLSaLB29Txy_yOnODAY/edit?usp=sharing)- This contains our product backlog, iteration backlog, and work log.
+
+
+## Dependencies
+
+# UPDATING UBUNTU
+```
+sudo apt-get update
+sudo apt-get upgrade
+```
+# INSTALL DEPENDENCIES
+```
+sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev
+
+sudo apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
+
+sudo apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev libavresample-dev
+```
+# GET OPEN CV
+
+```
+git clone https://github.com/opencv/opencv.git
+cd opencv 
+git checkout 3.3.0 
+cd ..
+git clone https://github.com/opencv/opencv_contrib.git
+cd opencv_contrib
+git checkout 3.3.0
+cd ..
+cd opencv
+mkdir build
+cd build
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+
+      -D CMAKE_INSTALL_PREFIX=/usr/local \
+      -D INSTALL_C_EXAMPLES=ON \
+      -D WITH_TBB=ON \
+      -D WITH_V4L=ON \
+      -D WITH_QT=ON \
+      -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib/modules \
+      -D BUILD_EXAMPLES=ON ..
+
+make -j$(nproc)
+sudo make install
+sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
+```
+
+# CHECKING THE PACKAGE VERSION
+
+```
+pkg-config --modversion opencv
+```
+
+
 
 ## Standard install via command-line
 ```
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
 cd <path to repository>
 mkdir build
 cd build
@@ -39,7 +94,7 @@ In your Eclipse workspace directory (or create a new one), checkout the repo (an
 ```
 mkdir -p ~/workspace
 cd ~/workspace
-git clone --recursive https://github.com/dpiet/cpp-boilerplate
+git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
 ```
 
 In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of cpp-boilerplate
