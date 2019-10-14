@@ -42,6 +42,31 @@ class Train {
      * @brief Destructor of the Train class
      */
     ~Train();
+
+  cv::Ptr<cv::ml::SVM> getClassifier() const {
+    return classifier;
+  }
+
+  void setClassifier(cv::Ptr<cv::ml::SVM> classifier) {
+    this->classifier = classifier;
+  }
+
+  std::vector<cv::Mat> getGradList() const {
+    return gradList;
+  }
+
+  void setGradList(std::vector<cv::Mat> gradList) {
+    this->gradList = gradList;
+  }
+
+  std::vector<int> getLabels() const {
+    return labels;
+  }
+
+  void setLabels(std::vector<int> labels) {
+    this->labels = labels;
+  }
+
 /**
  * @brief Private variable declaration
  */

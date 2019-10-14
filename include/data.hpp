@@ -39,6 +39,23 @@ class Data {
      * @brief Destructor for data class
      */
     ~Data();
+
+  std::vector<cv::Mat> getNegImageList() const {
+    return negImageList;
+  }
+
+  void setNegImageList(std::vector<cv::Mat> negImageList) {
+    this->negImageList = negImageList;
+  }
+
+  std::vector<cv::Mat> getPosImageList() const {
+    return posImageList;
+  }
+
+  void setPosImageList(std::vector<cv::Mat> posImageList) {
+    this->posImageList = posImageList;
+  }
+
 /**
  * @brief Private variables declaration
  */
