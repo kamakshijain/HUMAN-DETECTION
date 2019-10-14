@@ -1,10 +1,5 @@
-/*
- * detect.cpp
- *
- *  Created on: Oct 13, 2019
- *      Author: kamakshi
+/**
+ * @author kamakshi jain
+ * @file detect.cpp
+ * @copyright [2019] kamakshi jain
  */
-
-
-
-
