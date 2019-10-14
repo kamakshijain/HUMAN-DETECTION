@@ -21,6 +21,7 @@ In the training dataset, by using the HOG features descriptor, which will genera
 
 ## AIP Logs
 [AIP Spreadsheet](https://docs.google.com/spreadsheets/d/1HgRF67QFG2dfj0phShHm68qmcLSaLB29Txy_yOnODAY/edit?usp=sharing)- This contains our product backlog, iteration backlog, and work log.
+\newline
 [Sprint Planing](https://docs.google.com/document/d/1q1fZa8T8o8WiPjqkdCYfT_voSZSvZKb0-bGTY7lCoBc/edit?usp=sharing) - This contains the google doc with sprint plans and problems faced.
 
 
