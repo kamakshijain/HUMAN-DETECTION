@@ -1,78 +1,68 @@
 /**
- * @author kamakshi
- * @file train.hpp
+ * @author kamakshi jain
+ * @file data.hpp
  * @copyright [2019] kamakshi jain
- * @brief This is the stub for the train class
+ * @brief This is the stub for the data class
  */
 
-#ifndef INCLUDE_TRAIN_HPP_
-#define INCLUDE_TRAIN_HPP_
+#ifndef INCLUDE_DATA_HPP_
+#define INCLUDE_DATA_HPP_
 
 #include <iostream>
 #include <vector>
 #include <opencv2/opencv.hpp>
 
-class Train {
+class Data {
 /**
- * @brief Public methods and constructors declaration
+ * @brief Public methods declaration
  */
  public:
 	/**
-	 * @brief Constructor for the class Train
+	 * @brief Contructor for data class
 	 */
-    Train();
+    Data();
     /**
-     * @brief This function is for extracting the HOG features from an image
-     * @param The window size for HOG feature extractor
-     * @param The image whose HOG features are to be extracted
+     * @brief Loads the positive training image set
+     * @param The path to the directory to the annotations
+     * @param The path to the positive images dataset
+     * @param Resizing window for the image
      */
-    void GetHogFeatures(const cv::Size, const std::vector<cv::Mat> &);
+    void LoadPosImages(const cv::String, const cv::String,
+                           const cv::Size);
     /**
-     * @brief This function trains the SVM classifier from the HOG features
-     * @param If we want to save the classifier after training
-     * @param name of the classifier ,if to be saved
+     * @brief Loads the negative training set images
+     * @param The path to the directory to -ve images
+     * @param Resizing window for the image
      */
-    void TrainSVM(const bool, const cv::String);
+    void LoadNegImages(const cv::String, const cv::Size);
     /**
-     * @brief This function gives the support vectors of the classifier
-     * @return a double type vector
+     * @brief Destructor for data class
      */
-    std::vector<double> GetClassifier();
-    /**
-     * @brief Destructor of the Train class
-     */
-    ~Train();
+    ~Data();
 
-  cv::Ptr<cv::ml::SVM> getClassifier() const {
-    return classifier;
+  std::vector<cv::Mat> getNegImageList() const {
+    return negImageList;
   }
 
-  void setClassifier(cv::Ptr<cv::ml::SVM> classifier) {
-    this->classifier = classifier;
+  void setNegImageList(std::vector<cv::Mat> negImageList) {
+    this->negImageList = negImageList;
   }
 
-  std::vector<cv::Mat> getGradList() const {
-    return gradList;
+  std::vector<cv::Mat> getPosImageList() const {
+    return posImageList;
   }
 
-  void setGradList(std::vector<cv::Mat> gradList) {
-    this->gradList = gradList;
-  }
-
-  std::vector<int> getLabels() const {
-    return labels;
-  }
-
-  void setLabels(std::vector<int> labels) {
-    this->labels = labels;
+  void setPosImageList(std::vector<cv::Mat> posImageList) {
+    this->posImageList = posImageList;
   }
 
 /**
- * @brief Private variable declaration
+ * @brief Private variables declaration
  */
  private:
-    cv::Ptr<cv::ml::SVM> classifier;
-    std::vector<cv::Mat> gradList;
-    std::vector<int> labels;
+    std::vector<cv::Mat> posImageList, negImageList;
 };
-#endif  // INCLUDE_TRAIN_HPP_
+
+
+
+#endif  // INCLUDE_DATA_HPP_
