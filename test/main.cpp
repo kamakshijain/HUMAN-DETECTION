@@ -1,8 +1,3 @@
-/**
- * @author kamakshi jain
- * @file main.cpp
- * @copyright [2019] kamakshi jain
- */
 #include <gtest/gtest.h>
 
 int main(int argc, char** argv) {
