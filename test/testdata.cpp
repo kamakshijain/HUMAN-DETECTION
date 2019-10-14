@@ -14,9 +14,9 @@ TEST(dataTest, DataLoadPosImagesTest) {
   test.LoadPosImages("../data/test/annotations", "../data/test/pos",
                                           cv::Size(200, 200));
   // Check if the images are read
-  EXPECT_GT(test.posImageList.size(), 0);  // Greater than 0 is expected
+  EXPECT_GT(test.getPosImageList().size(), 0);  // Greater than 0 is expected
   bool imgSize = true;
-  for (auto img : test.posImageList)
+  for (auto img : test.getPosImageList())
     if (img.size() != cv::Size(200, 200)) {
       imgSize = false;
       break;

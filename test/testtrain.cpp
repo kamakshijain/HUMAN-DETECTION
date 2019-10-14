@@ -14,8 +14,8 @@ TEST(trainTest1, getHogFeaturesTest) {
     Data testData;
     Train testTrain;
     testData.LoadNegImages("../data/test/neg", cv::Size(200, 200));
-    testTrain.GetHogFeatures(cv::Size(200, 200), testData.negImageList);
+  testTrain.GetHogFeatures(cv::Size(200, 200), testData.getNegImageList());
     // Check if the gradList is non-empty
-    ASSERT_GT(testTrain.gradList.size(), 0);
+  ASSERT_GT(testTrain.getGradList().size(), 0);
     // The expected value is greater than 0
     }
