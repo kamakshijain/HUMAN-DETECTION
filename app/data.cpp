@@ -1,6 +1,6 @@
 /**
- * @author kamakshi jain
+ * @author Sayan Brahma
  * @file data.cpp
- * @copyright [2019] kamakshi jain
+ * @copyright [2019] Sayan Brahma
  */
 
