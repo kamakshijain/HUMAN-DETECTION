@@ -108,3 +108,39 @@ void Data::LoadPosImages(const cv::String anotPath, const cv::String posDir,
         }
 }
 
+void Data::LoadNegImages(const cv::String dirName, const cv::Size size) {
+        // Store files names
+        std::vector<cv::String> files;
+        // Extract file from the directory
+        cv::glob(dirName, files);
+
+        // Define a box of the same size as given
+        cv::Rect box;
+        box.width = size.width;
+        box.height = size.height;
+        const int size_x = box.width;
+        const int size_y = box.height;
+
+        // Random number seed
+        unsigned int seed = static_cast<unsigned int>(time(NULL));
+        srand(seed);
+
+        // Read negative images
+        for (auto imgName : files) {
+            // Read the image from the file
+            cv::Mat img = cv::imread(imgName);
+            // Check if image was read
+            if (img.empty()) {
+                std::cout << imgName << " is invalid!" << std::endl;
+                continue;
+            }
+
+            // Create a box randomly on the negative images
+            box.x = rand_r(&seed) % (img.cols - size_x);
+            box.y = rand_r(&seed) % (img.rows - size_y);
+            img = img(box);
+            // Store the image in a list
+            negImageList.push_back(img);
+        }
+    }
+
