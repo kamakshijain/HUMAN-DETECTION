@@ -107,7 +107,11 @@ void Data::LoadPosImages(const cv::String anotPath, const cv::String posDir,
             inputFile.close();
         }
 }
-
+/**
+ * @brief This function loads the negative images from the training dataset
+ * @param dirName The name of the directory
+ * @param size The size of the window of the images for sample
+ */
 void Data::LoadNegImages(const cv::String dirName, const cv::Size size) {
         // Store files names
         std::vector<cv::String> files;
@@ -143,4 +147,8 @@ void Data::LoadNegImages(const cv::String dirName, const cv::Size size) {
             negImageList.push_back(img);
         }
     }
+
+Data::Data() {
+}
+
 
