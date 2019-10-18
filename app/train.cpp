@@ -26,7 +26,6 @@ Train::Train() {
     classifier->setC(0.01);  //  soft classifier
     classifier->setType(cv::ml::SVM::EPS_SVR);
 }
-
 /*
  * @brief This function outputs the support vectors of the classifier.
  * @return A double vector containing the support vectors.
@@ -69,3 +68,31 @@ void Train::GetHogFeatures(const cv::Size windowSize,
             gradList.push_back(cv::Mat(descriptors).clone());
          }
 }
+/**
+ * @brief This function trains the SVM Classifier
+ * @param saveClassifier Whether to save the trained classifier or not
+ * @param classifierName Name of the classifer to be saved
+ */
+void Train::TrainSVM(const bool saveClassifier = false,
+        const cv::String classifierName = "") {
+    // check if HOG features are row vectors
+    const int rows = static_cast<int>(gradList.size());
+    const int cols = static_cast<int>(std::max(gradList[0].cols,
+        gradList[0].rows));
+    cv::Mat temp(1, cols, CV_32FC1), trainData(rows, cols, CV_32FC1);
+    auto index = 0;
+    for (auto index : gradList.size()) {
+        if (gradList[index].cols == 1) {
+                    transpose(gradList[index], temp);
+                    temp.copyTo(trainData.row(static_cast<int>(index)));
+                  } else if (gradList[index].rows == 1) {
+        gradList[index].copyTo(trainData.row(static_cast<int>(index)));
+                }
+           }
+    }
+/**
+ * @brief Destructor of the train class
+ */
+Train::~Train() {
+}
+
