@@ -30,7 +30,7 @@ class Detect {
      * @brief This function returns the current working mode
      * @return The working mode in string type
      */
-    std::string GetMode();
+    std::string GetMode() const;
     /**
      * @brief This function provides a bounding box around the humans detected
      * @param The image on which human is to be detected
