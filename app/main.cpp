@@ -60,7 +60,7 @@ int main() {
             allData.LoadPosImages(static_cast<cv::String>(annotationPath),
             static_cast<cv::String>(posDir), windowSize);
             // Check if images were successfully loaded
-            if (allData.posImageList.size() > 0) {
+            if (allData.getPosImageList().size() > 0) {
             std::cout << "Loading Positive Training Data Complete" << std::endl;
             } else {
             std::cout << "No images found. " <<
@@ -71,7 +71,7 @@ int main() {
             // load negative images
             std::cout << "Loading Negative Images" << std::endl;
             allData.LoadNegImages(static_cast<cv::String>(negDir), windowSize);
-            if (allData.negImageList.size() > 0) {
+            if (allData.getNegImageList().size() > 0) {
             std::cout << "Loading Negative Training Data Complete" << std::endl;
             } else {
             std::cout << "No images found. " <<
@@ -85,20 +85,20 @@ int main() {
             // For Positive Images
             std::cout << "Extracting HOG descriptors and storing ir in a " <<
                          "vector for Positive Images" << std::endl;
-            trainClass.GetHogFeatures(windowSize, allData.posImageList);
+            trainClass.GetHogFeatures(windowSize, allData.getPosImageList());
             // Assign Positive labels
-            size_t positiveCount = trainClass.gradList.size();
-            trainClass.labels.assign(positiveCount, 0);
+            size_t positiveCount = trainClass.getGradList().size();
+            trainClass.getLabels().assign(positiveCount, 0);
             std::cout << "Extracted HOG Descriptors for Positive Images" <<
                                                                     std::endl;
 
             // For negative images
             std::cout << "Extracting HOG descriptors and storing ir in a " <<
                          "vector for negative Images" << std::endl;
-            trainClass.GetHogFeatures(windowSize, allData.negImageList);
+            trainClass.GetHogFeatures(windowSize, allData.getNegImageList());
             // Assign Negative labels
-            size_t negativeCount = trainClass.gradList.size() - positiveCount;
-            trainClass.labels.insert(trainClass.labels.end(), negativeCount, 1);
+            size_t negativeCount = trainClass.getGradList().size() - positiveCount;
+            trainClass.getLabels().insert(trainClass.getLabels().end(), negativeCount, 1);
             std::cout << "Extracted HOG Descriptors for Positive Images" <<
             std::endl;
 
@@ -111,9 +111,8 @@ int main() {
             if (saveClassifier == "yes" || saveClassifier == "y"
             || saveClassifier == "Y") {
                 // Get path for the classifier
-                std::cout << "Give the Path for the Location where the " <<
-                "Classifier is to be Saved (Default is set as " <<
-                "'../data/classifier/svmClassifier'): ";
+                std::cout << "Give the address else press"
+            " enter to use the default one";
                 std::string svmName;
                 getline(std::cin, svmName);
                 if (svmName.empty())
@@ -139,9 +138,9 @@ int main() {
 
             // Test classifier
             Detect detector;
-            detector.hogUser.winSize = windowSize;
-            detector.hogUser.cellSize = cv::Size(4, 4);
-            detector.hogUser.setSVMDetector(trainClass.GetClassifier());
+            detector.getHogUser().winSize = windowSize;
+            detector.getHogUser().cellSize = cv::Size(4, 4);
+            detector.getHogUser().setSVMDetector(trainClass.GetClassifier());
             cv::Rect r = detector.TestClassifier(
                 static_cast<cv::String>(testDir), windowSize, "User");
             std::cout << "Program Finished" << std::endl;
@@ -178,7 +177,7 @@ int main() {
 
                 // Initialize the classifier
                 Train trainClass;
-                trainClass.classifier = cv::ml::SVM::load(svmName);
+                trainClass.getClassifier() = cv::ml::SVM::load(svmName);
 
                 // Set path for Testing Images
                 std::cout << "Give the Path for Testing Images " <<
@@ -190,9 +189,9 @@ int main() {
 
                 // Test Classifier
                 Detect detector;
-                detector.hogUser.winSize = windowSize;
-                detector.hogUser.cellSize = cv::Size(4, 4);
-                detector.hogUser.setSVMDetector(trainClass.GetClassifier());
+                detector.getHogUser().winSize = windowSize;
+                detector.getHogUser().cellSize = cv::Size(4, 4);
+                detector.getHogUser().setSVMDetector(trainClass.GetClassifier());
                 cv::Rect r = detector.TestClassifier(testDir, windowSize,
                                                      "User");
                 std::cout << "Finished" << std::endl;
@@ -206,3 +205,4 @@ int main() {
         }
         return 0;
     }
+
