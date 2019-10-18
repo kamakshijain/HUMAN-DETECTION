@@ -14,6 +14,7 @@
 Detect::Detect(): m(Default), hogDefault(), hogUser() {
     hogDefault.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
     hogUser.setSVMDetector(cv::HOGDescriptor::getDefaultPeopleDetector());
+    std::cout << "Detect class started" << std::endl;
 }
 /**
  *

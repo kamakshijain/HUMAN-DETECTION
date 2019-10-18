@@ -148,7 +148,7 @@ void Data::LoadNegImages(const cv::String dirName, const cv::Size size) {
         }
     }
 
-Data::Data() {
+Data::~Data() {
 }
 
 

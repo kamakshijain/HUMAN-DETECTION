@@ -80,8 +80,8 @@ void Train::TrainSVM(const bool saveClassifier = false,
     const int cols = static_cast<int>(std::max(gradList[0].cols,
         gradList[0].rows));
     cv::Mat temp(1, cols, CV_32FC1), trainData(rows, cols, CV_32FC1);
-    auto index = 0;
-    for (auto index : gradList.size()) {
+    // auto index = 0;
+    for (auto index = 0; index < gradList.size(); index++) {
         if (gradList[index].cols == 1) {
                     transpose(gradList[index], temp);
                     temp.copyTo(trainData.row(static_cast<int>(index)));
