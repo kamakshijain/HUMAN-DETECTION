@@ -40,7 +40,6 @@ class Detect {
      * @return The working mode in string type
      */
     std::string modeName() const;
-
     /**
      * @brief This function provides a bounding box around the humans detected
      * @param The image on which human is to be detected
@@ -72,3 +71,4 @@ class Detect {
 };
 
 #endif  // INCLUDE_DETECT_HPP_
+

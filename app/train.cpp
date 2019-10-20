@@ -56,7 +56,6 @@ void Train::getHOGfeatures(const cv::Size windowSize,
     hog.cellSize = cv::Size(4, 4);
     cv::Mat gray;
     std::vector<float> descriptors;
-
     for (auto data : imgList)
         if (data.cols >= windowSize.width && data.rows >= windowSize.height) {
             // convert image to grayscale
