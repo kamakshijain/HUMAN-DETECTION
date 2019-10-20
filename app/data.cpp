@@ -37,4 +37,3 @@ void Data::loadNegImages(const cv::String dirName, const cv::Size size) {
 Data::~Data() {
     std::cout << "Class Data has been Destroyed" << std::endl;
 }
-
