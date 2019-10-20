@@ -1,26 +1,42 @@
 /**
- *  @file testdata.cpp
- *  Copyright [2019] Kamakshi Jain
- *  @author Kamakshi Jain
- *  @brief This is the declaration of 1 unit test to be conducted, more tests might be added later on
+ * @author kamakshi jain, Sayan brahma
+ * @file testdata.cpp
+ * @copyright [2019] kamakshi jain, Sayan brahma
+ * @brief This is the test for the data class
  */
 
 #include <gtest/gtest.h>
 #include <data.hpp>
 
-// Test loadPosImages function of the data class
-TEST(dataTest, DataLoadPosImagesTest) {
+// Unit test loadPosImages method of class Data
+TEST(DataTest, DataLoadPosImagesTest) {
   Data test;
-  test.LoadPosImages("../data/test/annotations", "../data/test/pos",
-                                          cv::Size(200, 200));
-  // Check if the images are read
-  EXPECT_GT(test.getPosImageList().size(), 0);  // Greater than 0 is expected
-  bool imgSize = true;
-  for (auto img : test.getPosImageList())
+  test.loadPosImages("../data/test/annotations", "../data/test/pos",
+                                          cv::Size(200, 200), false);
+  // Check if the images were read
+  ASSERT_GT(test.getPosImgList().size(), 0);
+  bool sizeMatch = true;
+  for (auto img : test.getPosImgList())
     if (img.size() != cv::Size(200, 200)) {
-      imgSize = false;
+      sizeMatch = false;
       break;
     }
-  // Check whether the read images are of 200 x 200
-  EXPECT_TRUE(imgSize);
+  // Check if the images read have a size of 200 x 200
+  ASSERT_TRUE(sizeMatch);
+}
+
+// Unit test for loadNegImages method of class Data
+TEST(DataTest, DataLoadNegImagesTest) {
+  Data test;
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  // Check if the images were read
+  ASSERT_GT(test.getNegImgList().size(), 0);
+  bool sizeMatch = true;
+  for (auto img : test.getNegImgList())
+    if (img.size() != cv::Size(200, 200)) {
+      sizeMatch = false;
+      break;
+    }
+  // Check if the images read have a size of 200 x 200
+  ASSERT_TRUE(sizeMatch);
 }
