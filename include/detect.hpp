@@ -30,7 +30,7 @@ class Detect {
      * @brief This function returns the current working mode
      * @return The working mode in string type
      */
-    std::string GetMode();
+    std::string GetMode() const;
     /**
      * @brief This function provides a bounding box around the humans detected
      * @param The image on which human is to be detected
@@ -63,6 +63,22 @@ class Detect {
      */
     ~Detect();
 
+	cv::HOGDescriptor& getHogUser() {
+		return hogUser;
+	}
+
+	void setHogUser(const cv::HOGDescriptor &hogUser) {
+		this->hogUser = hogUser;
+	}
+
+	cv::HOGDescriptor& getHogDefault() {
+		return hogDefault;
+	}
+
+	void setHogDefault(const cv::HOGDescriptor &hogDefault) {
+		this->hogDefault = hogDefault;
+	}
+
 /**
  * @private variable declaration
  */
@@ -73,3 +89,4 @@ class Detect {
 };
 
 #endif  // INCLUDE_DETECT_HPP_
+
