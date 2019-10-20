@@ -1,4 +1,3 @@
-
 /*
  * @file detect.cpp
  *
@@ -146,4 +145,3 @@ cv::Rect Detect::testClassifier(const cv::String testDir, const cv::Size size,
 Detect::~Detect() {
     std::cout << "Class Detect has been Destroyed" << std::endl;
 }
-

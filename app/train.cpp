@@ -1,4 +1,3 @@
-
 /*
  * @file train.cpp
  *
@@ -108,4 +107,3 @@ void Train::trainSVM(const bool saveClassifier = false,
 Train::~Train() {
     std::cout << "Class Train has been Destroyed" << std::endl;
 }
-

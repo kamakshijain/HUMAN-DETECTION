@@ -72,4 +72,3 @@ TEST(DetectTest, DetectTestClassifierTest) {
   // Check if the bounding box computed by the two methods are close
   ASSERT_LT(orgBox.area() - (orgBox & r).area(), 500);
 }
-

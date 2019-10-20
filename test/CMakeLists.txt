@@ -3,7 +3,7 @@ set(GTEST_SHUFFLE 1)
 add_executable(
     cpp-test
     main.cpp
-    testData.cpp
+    testdata.cpp
     ../app/data.cpp
     testtrain.cpp
     ../app/train.cpp

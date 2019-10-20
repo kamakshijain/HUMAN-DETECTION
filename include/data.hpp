@@ -1,8 +1,8 @@
 /**
- * @author kamakshi jain
+ * @author kamakshi jain, Sayan Brahma
  * @file data.hpp
- * @copyright [2019] kamakshi jain
- * @brief This is the stub for the data class
+ * @copyright [2019] kamakshi jain , Sayan Brahma
+ * @brief This is the stub for the Data class
  */
 
 #ifndef INCLUDE_DATA_HPP_
@@ -12,57 +12,60 @@
 #include <vector>
 #include <opencv2/opencv.hpp>
 
-class Data {
-/**
- * @brief Public methods declaration
+/*
+ * @brief Data is a class
  */
- public:
+class Data {
 	/**
-	 * @brief Contructor for data class
+	 * @brief Public methods declaration
 	 */
+ public:
+    /*
+     * @brief This is the constructor for the class
+     */
     Data();
+
     /**
      * @brief Loads the positive training image set
      * @param The path to the directory to the annotations
      * @param The path to the positive images dataset
      * @param Resizing window for the image
      */
-    void LoadPosImages(const cv::String, const cv::String,
-                           const cv::Size);
+    void loadPosImages(const cv::String, const cv::String,
+                       const cv::Size, const bool);
+
     /**
      * @brief Loads the negative training set images
      * @param The path to the directory to -ve images
      * @param Resizing window for the image
      */
-    void LoadNegImages(const cv::String, const cv::Size);
+    void loadNegImages(const cv::String, const cv::Size);
+
     /**
      * @brief Destructor for data class
      */
     ~Data();
 
-  std::vector<cv::Mat> getNegImageList() const {
-    return negImageList;
-  }
+    const std::vector<cv::Mat>& getNegImgList() const {
+    return negImgList;
+    }
 
-  void setNegImageList(std::vector<cv::Mat> negImageList) {
-    this->negImageList = negImageList;
-  }
+    void setNegImgList(const std::vector<cv::Mat> &negImgList) {
+    this->negImgList = negImgList;
+    }
 
-  std::vector<cv::Mat> getPosImageList() const {
-    return posImageList;
-  }
+    const std::vector<cv::Mat>& getPosImgList() const {
+    return posImgList;
+    }
 
-  void setPosImageList(std::vector<cv::Mat> posImageList) {
-    this->posImageList = posImageList;
-  }
-
-/**
- * @brief Private variables declaration
- */
+    void setPosImgList(const std::vector<cv::Mat> &posImgList) {
+    this->posImgList = posImgList;
+    }
+    /**
+     * @brief Private variables declaration
+     */
  private:
-    std::vector<cv::Mat> posImageList, negImageList;
+    std::vector<cv::Mat> posImgList, negImgList;
 };
-
-
 
 #endif  // INCLUDE_DATA_HPP_

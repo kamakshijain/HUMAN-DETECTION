@@ -56,4 +56,3 @@ TEST(TrainTest, TrainGetClassifierTest) {
   // Check if the getClassifier gives a non-empty output
   ASSERT_NE(test.getClassifier().size(), 0);
 }
-
