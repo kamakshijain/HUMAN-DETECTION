@@ -109,7 +109,8 @@ cv::Rect Detect::testClassifier(const cv::String testDir, const cv::Size size,
 
         // Creating the Bounding Box
         std::cout << "Creating Bounding Boxes" << std::endl;
-        for (auto i = detections.begin(); i != detections.end(); i++) {
+        auto i = detections.begin(); 
+        while (i != detections.end()) {
             cv::Rect &r = *i;
             // std::cout << r << std::endl;  // display coordinates
             // To pass the test
@@ -129,6 +130,7 @@ cv::Rect Detect::testClassifier(const cv::String testDir, const cv::Size size,
             // int arr[] = r.tl();
             // for(auto i : arr)
             // std::cout << i;
+            i = i+1;
 }
         if (dispImage) {
             cv::resize(img, img, cv::Size(900, 900));

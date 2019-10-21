@@ -40,6 +40,7 @@ void Data::loadPosImages(const cv::String anotPath, const cv::String  posDir,
 
     std::cout << "Reading annotations from " << anotPath << std::endl;
     // Main loop for reading through all the files
+    // Since range base for loop for 2 variables are difficult to make
     for (auto k = files.begin(), l = filesAnnot.begin();
               k != files.end(), l != filesAnnot.end(); k++, l++) {
         // Stores the file
