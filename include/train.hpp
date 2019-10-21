@@ -52,8 +52,8 @@ class Train {
     return gradientList;
     }
 
-    void setGradientList(const std::vector<cv::Mat> &gradientList) {
-        this->gradientList = gradientList;
+    void setGradientList(const std::vector<cv::Mat> &gradientLis) {
+        gradientList = gradientLis;
     }
 
  private:

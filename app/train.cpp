@@ -83,14 +83,15 @@ void Train::trainSVM(const bool saveClassifier = false,
     const int cols = static_cast<int>(std::max(gradientList[0].cols,
                                                gradientList[0].rows));
     cv::Mat temp(1, cols, CV_32FC1), trainData(rows, cols, CV_32FC1);
-    // auto index = 0;
-    for (auto index = 0; index < gradientList.size(); index++) {
+    auto index = 0;
+    while (index < gradientList.size()) {
         if (gradientList[index].cols == 1) {
             transpose(gradientList[index], temp);
             temp.copyTo(trainData.row(static_cast<int>(index)));
         } else if (gradientList[index].rows == 1) {
             gradientList[index].copyTo(trainData.row(static_cast<int>(index)));
         }
+        index = index + 1;
     }
 
     // Training Starts

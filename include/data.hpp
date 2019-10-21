@@ -50,16 +50,16 @@ class Data {
     return negImgList;
     }
 
-    void setNegImgList(const std::vector<cv::Mat> &negImgList) {
-    this->negImgList = negImgList;
+    void setNegImgList(const std::vector<cv::Mat> &negImgLis) {
+    negImgList = negImgLis;
     }
 
     const std::vector<cv::Mat>& getPosImgList() const {
     return posImgList;
     }
 
-    void setPosImgList(const std::vector<cv::Mat> &posImgList) {
-    this->posImgList = posImgList;
+    void setPosImgList(const std::vector<cv::Mat> &posImgLis) {
+    posImgList = posImgLis;
     }
     /**
      * @brief Private variables declaration
