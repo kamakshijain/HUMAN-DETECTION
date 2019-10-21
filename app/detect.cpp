@@ -131,7 +131,7 @@ cv::Rect Detect::testClassifier(const cv::String testDir, const cv::Size size,
             // std::cout << i;
 }
         if (dispImage) {
-            cv::resize(img, img, cvSize(900, 900));
+            cv::resize(img, img, cv::Size(900, 900));
             cv::imshow("Detected Humans" , img);
             cv::waitKey(700);
         }
