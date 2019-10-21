@@ -191,20 +191,20 @@ To generate Doxygen Documentation in HTML and LaTEX, follow the next steps:
 Create a blank txt file inside a folder docs. 
 ```
 cd <path to repository>
-mkdir <documentation_folder_name>
-cd <documentation_folder_name>
-doxygen -g <config_file_name>
+doxygen -g
 ```
 Inside the configuration file, update:
 ```
 PROJECT_NAME = 'your project name'
-INPUT = ../app ../include ../test
+RECURSIVE = YES
+EXCLUDE_PATHS = */VENDOR/*
+EXTRACT_ALL = YES
 ```
 Run and generate the documents by running the next command:
 ```
 doxygen <config_file_name>
 ```
-You can see our complete doxygen file in the path - docs/html/index.html
+You can see our complete doxygen file in the path - DOXYGEN/html/index.html
 
 
 ## Plugins
