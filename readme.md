@@ -75,6 +75,28 @@ sudo ldconfig
 ```
 pkg-config --modversion opencv
 ```
+## OUTPUT DIRECTIONS
+
+### Build
+```
+git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
+cd <path to repository>
+mkdir build
+cd build
+cmake ..
+make
+Run program: ./app/shell-app
+```
+### Demo Walkthrough
+
+Download [INRIA Person Dataset](http://pascal.inrialpes.fr/data/human/) to train our SVM.
+
+Press 'y' if want to train a Classifier. Follow the subsequent steps for a demo on trainning SVM.\
+** The program reads data from a default path if a new path isn't given. Press enter to move to next step if you dont want to give a new path.
+
+After trainning demo run -   ./app/shell-app   command to see the testing demo.\ 
+Press 'n' to see the testing demo either using your trained SVM or default SVM classifier of opencv.\
+** The program reads data from a default path if a new path isnt given. Press enter to move to next step if you dont want to give a new path.
 
 ## LICENSE
 ### Copyright <2019> <Kamakshi Jain> <Sayan Brahma>
@@ -87,17 +109,8 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 ```
 
-## Standard install via command-line
-```
-git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
-cd <path to repository>
-mkdir build
-cd build
-cmake ..
-make
-Run tests: ./test/cpp-test
-Run program: ./app/shell-app
-```
+
+
 
 ## Building for code coverage (for assignments beginning in Week 4)
 ```
