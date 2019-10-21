@@ -1,0 +1,92 @@
+\hypertarget{classData}{}\section{Data Class Reference}
+\label{classData}\index{Data@{Data}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classData_af11f741cb7f587e2e495452a8905a22a}{Data} ()\hypertarget{classData_af11f741cb7f587e2e495452a8905a22a}{}\label{classData_af11f741cb7f587e2e495452a8905a22a}
+
+\begin{DoxyCompactList}\small\item\em Public methods declaration. \end{DoxyCompactList}\item 
+void \hyperlink{classData_a30cb7a53ab253a2f7e477ac13fe4c3e3}{load\+Pos\+Images} (const cv\+::\+String, const cv\+::\+String, const cv\+::\+Size, const bool)
+\begin{DoxyCompactList}\small\item\em Loads the positive training image set. \end{DoxyCompactList}\item 
+void \hyperlink{classData_a7a9b971dd776aa4086174ea2704bacd5}{load\+Neg\+Images} (const cv\+::\+String, const cv\+::\+Size)
+\begin{DoxyCompactList}\small\item\em Loads the negative training set images. \end{DoxyCompactList}\item 
+\hyperlink{classData_aab31956423290f0d62dcca47ab4d16dd}{$\sim$\+Data} ()\hypertarget{classData_aab31956423290f0d62dcca47ab4d16dd}{}\label{classData_aab31956423290f0d62dcca47ab4d16dd}
+
+\begin{DoxyCompactList}\small\item\em Destructor for data class. \end{DoxyCompactList}\item 
+const std\+::vector$<$ cv\+::\+Mat $>$ \& {\bfseries get\+Neg\+Img\+List} () const \hypertarget{classData_a7d2fe8b20182b53ad41e12149cc90932}{}\label{classData_a7d2fe8b20182b53ad41e12149cc90932}
+
+\item 
+void {\bfseries set\+Neg\+Img\+List} (const std\+::vector$<$ cv\+::\+Mat $>$ \&neg\+Img\+List)\hypertarget{classData_af7e20089fe510f0064a47e89d037f02b}{}\label{classData_af7e20089fe510f0064a47e89d037f02b}
+
+\item 
+const std\+::vector$<$ cv\+::\+Mat $>$ \& {\bfseries get\+Pos\+Img\+List} () const \hypertarget{classData_a20bed9baad2849686a4ffa2f92756a72}{}\label{classData_a20bed9baad2849686a4ffa2f92756a72}
+
+\item 
+void {\bfseries set\+Pos\+Img\+List} (const std\+::vector$<$ cv\+::\+Mat $>$ \&pos\+Img\+List)\hypertarget{classData_af0a76aae7d66ef0a181928d4bf5a59e0}{}\label{classData_af0a76aae7d66ef0a181928d4bf5a59e0}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{Data@{Data}!load\+Neg\+Images@{load\+Neg\+Images}}
+\index{load\+Neg\+Images@{load\+Neg\+Images}!Data@{Data}}
+\subsubsection[{\texorpdfstring{load\+Neg\+Images(const cv\+::\+String, const cv\+::\+Size)}{loadNegImages(const cv::String, const cv::Size)}}]{\setlength{\rightskip}{0pt plus 5cm}void Data\+::load\+Neg\+Images (
+\begin{DoxyParamCaption}
+\item[{const cv\+::\+String}]{dir\+Name, }
+\item[{const cv\+::\+Size}]{size}
+\end{DoxyParamCaption}
+)}\hypertarget{classData_a7a9b971dd776aa4086174ea2704bacd5}{}\label{classData_a7a9b971dd776aa4086174ea2704bacd5}
+
+
+Loads the negative training set images. 
+
+This function loads the negative images from the training dataset.
+
+
+\begin{DoxyParams}{Parameters}
+{\em The} & path to the directory to -\/ve images \\
+\hline
+{\em Resizing} & window for the image\\
+\hline
+{\em dir\+Name} & The name of the directory \\
+\hline
+{\em size} & The size of the window of the images for sample \\
+\hline
+\end{DoxyParams}
+\index{Data@{Data}!load\+Pos\+Images@{load\+Pos\+Images}}
+\index{load\+Pos\+Images@{load\+Pos\+Images}!Data@{Data}}
+\subsubsection[{\texorpdfstring{load\+Pos\+Images(const cv\+::\+String, const cv\+::\+String, const cv\+::\+Size, const bool)}{loadPosImages(const cv::String, const cv::String, const cv::Size, const bool)}}]{\setlength{\rightskip}{0pt plus 5cm}void Data\+::load\+Pos\+Images (
+\begin{DoxyParamCaption}
+\item[{const cv\+::\+String}]{anot\+Path, }
+\item[{const cv\+::\+String}]{pos\+Dir, }
+\item[{const cv\+::\+Size}]{size, }
+\item[{const bool}]{disp\+Img = {\ttfamily false}}
+\end{DoxyParamCaption}
+)}\hypertarget{classData_a30cb7a53ab253a2f7e477ac13fe4c3e3}{}\label{classData_a30cb7a53ab253a2f7e477ac13fe4c3e3}
+
+
+Loads the positive training image set. 
+
+This function draws a rectangle around a human in the pictures of positive image directory also can be used as ground truth.
+
+
+\begin{DoxyParams}{Parameters}
+{\em The} & path to the directory to the annotations \\
+\hline
+{\em The} & path to the positive images dataset \\
+\hline
+{\em Resizing} & window for the image\\
+\hline
+{\em anot\+Path} & Path of the annotation file for positive images \\
+\hline
+{\em pos\+Dir} & Path of the positive image directory \\
+\hline
+{\em size} & the resize window of the image \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/sayan/week7-\/midterm/kam/\+H\+U\+M\+A\+N-\/\+D\+E\+T\+E\+C\+T\+I\+O\+N/include/\hyperlink{data_8hpp}{data.\+hpp}\item 
+/home/sayan/week7-\/midterm/kam/\+H\+U\+M\+A\+N-\/\+D\+E\+T\+E\+C\+T\+I\+O\+N/app/data.\+cpp\end{DoxyCompactItemize}

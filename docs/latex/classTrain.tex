@@ -1,0 +1,112 @@
+\hypertarget{classTrain}{}\section{Train Class Reference}
+\label{classTrain}\index{Train@{Train}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classTrain_aa05ce5a8ff68dea76d457f4ff2d0d1ba}{Train} ()\hypertarget{classTrain_aa05ce5a8ff68dea76d457f4ff2d0d1ba}{}\label{classTrain_aa05ce5a8ff68dea76d457f4ff2d0d1ba}
+
+\begin{DoxyCompactList}\small\item\em Constructor for the class \hyperlink{classTrain}{Train}. \end{DoxyCompactList}\item 
+std\+::vector$<$ float $>$ \hyperlink{classTrain_a72251742e0ed3d4871dffe8a05ebbc8c}{get\+Classifier} ()
+\begin{DoxyCompactList}\small\item\em This function gives the support vectors of the classifier. \end{DoxyCompactList}\item 
+void \hyperlink{classTrain_a6a98a6bbafe06950a62d5825a7eda62f}{get\+H\+O\+Gfeatures} (const cv\+::\+Size, const std\+::vector$<$ cv\+::\+Mat $>$ \&)
+\begin{DoxyCompactList}\small\item\em This function is for extracting the H\+OG features from an image. \end{DoxyCompactList}\item 
+void \hyperlink{classTrain_a7a7755ffab3240048df164cb4dff409c}{train\+S\+VM} (const bool, const cv\+::\+String)
+\begin{DoxyCompactList}\small\item\em This function trains the S\+VM classifier from the H\+OG features. \end{DoxyCompactList}\item 
+\hyperlink{classTrain_a28c78c0d21e7fbce79cb94927f23c11e}{$\sim$\+Train} ()
+\begin{DoxyCompactList}\small\item\em Destructor of the \hyperlink{classTrain}{Train} class. \end{DoxyCompactList}\item 
+const std\+::vector$<$ cv\+::\+Mat $>$ \& {\bfseries get\+Gradient\+List} () const \hypertarget{classTrain_a5d4a82b27e9ee2d51d87741db5accb88}{}\label{classTrain_a5d4a82b27e9ee2d51d87741db5accb88}
+
+\item 
+void {\bfseries set\+Gradient\+List} (const std\+::vector$<$ cv\+::\+Mat $>$ \&gradient\+List)\hypertarget{classTrain_a922b18b7e838985c3852646e53eec2f5}{}\label{classTrain_a922b18b7e838985c3852646e53eec2f5}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+cv\+::\+Ptr$<$ cv\+::ml\+::\+S\+VM $>$ \hyperlink{classTrain_af48556029dbb829b97e52a47c38f5dec}{classifier}\hypertarget{classTrain_af48556029dbb829b97e52a47c38f5dec}{}\label{classTrain_af48556029dbb829b97e52a47c38f5dec}
+
+\begin{DoxyCompactList}\small\item\em Public methods and constructors declaration. \end{DoxyCompactList}\item 
+std\+::vector$<$ int $>$ {\bfseries labels}\hypertarget{classTrain_a94e850beee52059be00a4fd9068cb223}{}\label{classTrain_a94e850beee52059be00a4fd9068cb223}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Train@{Train}!````~Train@{$\sim$\+Train}}
+\index{````~Train@{$\sim$\+Train}!Train@{Train}}
+\subsubsection[{\texorpdfstring{$\sim$\+Train()}{~Train()}}]{\setlength{\rightskip}{0pt plus 5cm}Train\+::$\sim$\+Train (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrain_a28c78c0d21e7fbce79cb94927f23c11e}{}\label{classTrain_a28c78c0d21e7fbce79cb94927f23c11e}
+
+
+Destructor of the \hyperlink{classTrain}{Train} class. 
+
+Destructor of the train class. 
+
+\subsection{Member Function Documentation}
+\index{Train@{Train}!get\+Classifier@{get\+Classifier}}
+\index{get\+Classifier@{get\+Classifier}!Train@{Train}}
+\subsubsection[{\texorpdfstring{get\+Classifier()}{getClassifier()}}]{\setlength{\rightskip}{0pt plus 5cm}std\+::vector$<$ float $>$ Train\+::get\+Classifier (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrain_a72251742e0ed3d4871dffe8a05ebbc8c}{}\label{classTrain_a72251742e0ed3d4871dffe8a05ebbc8c}
+
+
+This function gives the support vectors of the classifier. 
+
+\begin{DoxyReturn}{Returns}
+a float type vector 
+\end{DoxyReturn}
+\index{Train@{Train}!get\+H\+O\+Gfeatures@{get\+H\+O\+Gfeatures}}
+\index{get\+H\+O\+Gfeatures@{get\+H\+O\+Gfeatures}!Train@{Train}}
+\subsubsection[{\texorpdfstring{get\+H\+O\+Gfeatures(const cv\+::\+Size, const std\+::vector$<$ cv\+::\+Mat $>$ \&)}{getHOGfeatures(const cv::Size, const std::vector< cv::Mat > &)}}]{\setlength{\rightskip}{0pt plus 5cm}void Train\+::get\+H\+O\+Gfeatures (
+\begin{DoxyParamCaption}
+\item[{const cv\+::\+Size}]{window\+Size, }
+\item[{const std\+::vector$<$ cv\+::\+Mat $>$ \&}]{img\+List}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrain_a6a98a6bbafe06950a62d5825a7eda62f}{}\label{classTrain_a6a98a6bbafe06950a62d5825a7eda62f}
+
+
+This function is for extracting the H\+OG features from an image. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em The} & window size for H\+OG feature extractor \\
+\hline
+{\em The} & image whose H\+OG features are to be extracted \\
+\hline
+\end{DoxyParams}
+\index{Train@{Train}!train\+S\+VM@{train\+S\+VM}}
+\index{train\+S\+VM@{train\+S\+VM}!Train@{Train}}
+\subsubsection[{\texorpdfstring{train\+S\+V\+M(const bool, const cv\+::\+String)}{trainSVM(const bool, const cv::String)}}]{\setlength{\rightskip}{0pt plus 5cm}void Train\+::train\+S\+VM (
+\begin{DoxyParamCaption}
+\item[{const bool}]{save\+Classifier = {\ttfamily false}, }
+\item[{const cv\+::\+String}]{classifier\+Name = {\ttfamily \char`\"{}\char`\"{}}}
+\end{DoxyParamCaption}
+)}\hypertarget{classTrain_a7a7755ffab3240048df164cb4dff409c}{}\label{classTrain_a7a7755ffab3240048df164cb4dff409c}
+
+
+This function trains the S\+VM classifier from the H\+OG features. 
+
+This function trains the S\+VM Classifier.
+
+
+\begin{DoxyParams}{Parameters}
+{\em If} & we want to save the classifier after training \\
+\hline
+{\em name} & of the classifier ,if to be saved\\
+\hline
+{\em save\+Classifier} & Whether to save the trained classifier or not \\
+\hline
+{\em classifier\+Name} & Name of the classifer to be saved \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/sayan/week7-\/midterm/kam/\+H\+U\+M\+A\+N-\/\+D\+E\+T\+E\+C\+T\+I\+O\+N/include/\hyperlink{train_8hpp}{train.\+hpp}\item 
+/home/sayan/week7-\/midterm/kam/\+H\+U\+M\+A\+N-\/\+D\+E\+T\+E\+C\+T\+I\+O\+N/app/train.\+cpp\end{DoxyCompactItemize}
