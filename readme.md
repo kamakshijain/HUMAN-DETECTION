@@ -199,6 +199,7 @@ PROJECT_NAME = 'your project name'
 RECURSIVE = YES
 EXCLUDE_PATHS = */VENDOR/*
 EXTRACT_ALL = YES
+OUTPUT_DIRECTORY       = DOXYGEN/
 ```
 Run and generate the documents by running the next command:
 ```
