@@ -207,6 +207,8 @@ doxygen <config_file_name>
 ```
 You can see our complete doxygen file in the path - DOXYGEN/html/index.html
 
+## Final Deliverables
+Our deliverables to Acme Robotics would consist of a software package with above defined functionality. The package would consist of the source code, documentation for the source code, documentation for software installation and execution. We will also provide a software demo to demonstrate basic use and functionality.
 
 ## Plugins
 
