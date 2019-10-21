@@ -185,6 +185,25 @@ debugger window.
 7. Press Terminate icon to terminate debugging and press C/C++ icon to switch back to C/C++ 
 perspetive view (or Windows->Perspective->Open Perspective->C/C++).
 
+## Doxygen Documentation
+To generate Doxygen Documentation in HTML and LaTEX, follow the next steps:
+Create a blank txt file inside a folder docs. 
+```
+cd <path to repository>
+mkdir <documentation_folder_name>
+cd <documentation_folder_name>
+doxygen -g <config_file_name>
+```
+Inside the configuration file, update:
+```
+PROJECT_NAME = 'your project name'
+INPUT = ../app ../include ../test
+```
+Run and generate the documents by running the next command:
+```
+doxygen <config_file_name>
+```
+
 
 ## Plugins
 
