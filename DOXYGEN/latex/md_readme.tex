@@ -1,0 +1,226 @@
+\href{https://travis-ci.org/kamakshijain/HUMAN-DETECTION}{\tt } \href{https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=master}{\tt } \subsection*{\href{https://opensource.org/licenses/MIT}{\tt } }
+
+\subsection*{Overview}
+
+During catastrophe, natural or man-\/made, collapsing buildings, landslide or crater is a common phenomenon and many people are deployed to make quick decisions, and try to get victims to safely at their own risk. They must determine the location of victims as quickly as possible so that medics and firefighters can enter the disaster area and save victims. For the last few years, mobile robots have been proposed to help them and to perform tasks that neither humans, dogs nor existing tools can do.
+
+This project should ideally consist of sensors, camera, controls system, and actuators. Sensors should help with speed and obstacle avoidance while maneuvering. The camera should capture frames which will be used in the perception module to detect humans and give position of the human wrt robot. Co-\/ordinates of the human should be fed to the control system which in turn would actuate the robot to reach the human by continuously adjusting its alignment according to the motion planning module.
+
+For this project, we will be focusing on the perception part of the robot to generate an algorithm to accurately detect and send a location of the human in robot’s frame of reference. Here the robot’s reference point will be considered to be the center pixel of the image and the location of the human will be the central pixel of the bounding box around the human. We would like to generate the location of the human with respect to the robot as the output so that the robot can be given the navigation commands or instructions accordingly.
+
+We have planned to use the \href{http://pascal.inrialpes.fr/data/human/}{\tt I\+N\+R\+IA Person Dataset} for getting the training and testing data and Open\+CV library, which is covered under the 3-\/clause B\+SD License third party computer vision library for all the image related work with C++ as our coding language. Any other library if required, later on, will be added with permission. We would want the permission to go for any better algorithm apart from the ones decided for the project, which might be easy to implement, if discovered within the duration of the project.
+
+In the training dataset, by using the H\+OG features descriptor, which will generate a dense gradient orientation in the localized portion of the image based on occurrence, we will train the S\+VM classifier to output an optimal hyperplane that will categorize new examples based on the trained ones. After the S\+VM is being trained, it will be used on the test images to find the accuracy of the model in detecting a human. Finally, using this algorithm we get the location of the human with respect to the robot reference frame.
+
+\subsection*{A\+IP Logs}
+
+\href{https://docs.google.com/spreadsheets/d/1HgRF67QFG2dfj0phShHm68qmcLSaLB29Txy_yOnODAY/edit?usp=sharing}{\tt A\+IP Spreadsheet}-\/ This contains our product backlog, iteration backlog, and work log. \subsection*{Sprint doc}
+
+\href{https://docs.google.com/document/d/1q1fZa8T8o8WiPjqkdCYfT_voSZSvZKb0-bGTY7lCoBc/edit?usp=sharing}{\tt Sprint Planing} -\/ This contains the google doc with sprint plans and problems faced.
+
+\subsection*{Dependencies}
+
+\#\#\# U\+P\+D\+A\+T\+I\+NG U\+B\+U\+N\+TU 
+\begin{DoxyCode}
+1 sudo apt-get update
+2 sudo apt-get upgrade
+\end{DoxyCode}
+ \#\#\# I\+N\+S\+T\+A\+LL D\+E\+P\+E\+N\+D\+E\+N\+C\+I\+ES 
+\begin{DoxyCode}
+1 sudo apt-get install build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev
+       libswscale-dev
+2 
+3 sudo apt-get install python3.5-dev python3-numpy libtbb2 libtbb-dev
+4 
+5 sudo apt-get install libjpeg-dev libpng-dev libtiff5-dev libjasper-dev libdc1394-22-dev libeigen3-dev
+       libtheora-dev libvorbis-dev libxvidcore-dev libx264-dev sphinx-common libtbb-dev yasm libfaac-dev
+       libopencore-amrnb-dev libopencore-amrwb-dev libopenexr-dev libgstreamer-plugins-base1.0-dev libavutil-dev libavfilter-dev
+       libavresample-dev
+\end{DoxyCode}
+ \subsubsection*{G\+ET O\+P\+EN CV}
+
+
+\begin{DoxyCode}
+1 git clone https://github.com/opencv/opencv.git
+2 cd opencv 
+3 git checkout 3.3.0 
+4 cd ..
+5 git clone https://github.com/opencv/opencv\_contrib.git
+6 cd opencv\_contrib
+7 git checkout 3.3.0
+8 cd ..
+9 cd opencv
+10 mkdir build
+11 cd build
+12 cmake -D CMAKE\_BUILD\_TYPE=RELEASE \(\backslash\)
+13 
+14       -D CMAKE\_INSTALL\_PREFIX=/usr/local \(\backslash\)
+15       -D INSTALL\_C\_EXAMPLES=ON \(\backslash\)
+16       -D WITH\_TBB=ON \(\backslash\)
+17       -D WITH\_V4L=ON \(\backslash\)
+18       -D WITH\_QT=ON \(\backslash\)
+19       -D OPENCV\_EXTRA\_MODULES\_PATH=../../opencv\_contrib/modules \(\backslash\)
+20       -D BUILD\_EXAMPLES=ON ..
+21 
+22 make -j$(nproc)
+23 sudo make install
+24 sudo /bin/bash -c 'echo "/usr/local/lib" > /etc/ld.so.conf.d/opencv.conf'
+25 sudo ldconfig
+\end{DoxyCode}
+
+
+\subsubsection*{C\+H\+E\+C\+K\+I\+NG T\+HE P\+A\+C\+K\+A\+GE V\+E\+R\+S\+I\+ON}
+
+
+\begin{DoxyCode}
+1 pkg-config --modversion opencv
+\end{DoxyCode}
+ \subsection*{O\+U\+T\+P\+UT D\+I\+R\+E\+C\+T\+I\+O\+NS}
+
+\#\#\# Build 
+\begin{DoxyCode}
+1 git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
+2 cd <path to repository>
+3 mkdir build
+4 cd build
+5 cmake ..
+6 make
+7 Run program: ./app/shell-app
+\end{DoxyCode}
+ \subsubsection*{Demo Walkthrough}
+
+Download \href{http://pascal.inrialpes.fr/data/human/}{\tt I\+N\+R\+IA Person Dataset} to train our S\+VM.
+
+Press \textquotesingle{}y\textquotesingle{} if want to train a Classifier. Follow the subsequent steps for a demo on trainning S\+VM.\textbackslash{} $\ast$$\ast$ The program reads data from a default path if a new path isn\textquotesingle{}t given. Press enter to move to next step if you dont want to give a new path.
+
+After trainning demo run -\/ ./app/shell-\/app command to see the testing demo. Press \textquotesingle{}n\textquotesingle{} to see the testing demo either using your trained S\+VM or default S\+VM classifier of opencv.\textbackslash{} $\ast$$\ast$ The program reads data from a default path if a new path isnt given. Press enter to move to next step if you dont want to give a new path.
+
+\subsection*{L\+I\+C\+E\+N\+SE}
+
+\#\#\# Copyright $<$2019$>$ $<$\+Kamakshi jain$>$=\char`\"{}\char`\"{}$>$ $<$\+Sayan brahma$>$=\char`\"{}\char`\"{}$>$ 
+\begin{DoxyCode}
+1 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+       associated documentation files (the "Software"), to deal in the Software without restriction, including without
+       limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
+       Software, and to permit persons to whom the Software is furnished to do so, subject to the following
+       conditions:
+2 
+3 The above copyright notice and this permission notice shall be included in all copies or substantial
+       portions of the Software.
+4 
+5 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT
+       LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT
+       SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+       ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+       OTHER DEALINGS IN THE SOFTWARE.
+\end{DoxyCode}
+
+
+\#\# Building for code coverage (for assignments beginning in Week 4) 
+\begin{DoxyCode}
+1 sudo apt-get install lcov
+2 cmake -D COVERAGE=ON -D CMAKE\_BUILD\_TYPE=Debug ../
+3 make
+4 make code\_coverage
+\end{DoxyCode}
+ This generates a index.\+html page in the build/coverage sub-\/directory that can be viewed locally in a web browser.
+
+\subsection*{Working with Eclipse I\+DE}
+
+\subsection*{Installation}
+
+In your Eclipse workspace directory (or create a new one), checkout the repo (and submodules) 
+\begin{DoxyCode}
+1 mkdir -p ~/workspace
+2 cd ~/workspace
+3 git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
+\end{DoxyCode}
+
+
+In your work directory, use cmake to create an Eclipse project for an \mbox{[}out-\/of-\/source build\mbox{]} of cpp-\/boilerplate
+
+
+\begin{DoxyCode}
+1 cd ~/workspace
+2 mkdir -p boilerplate-eclipse
+3 cd boilerplate-eclipse
+4 cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE\_BUILD\_TYPE=Debug -D CMAKE\_ECLIPSE\_VERSION=4.7.0 -D
+       CMAKE\_CXX\_COMPILER\_ARG1=-std=c++14 ../cpp-boilerplate/
+\end{DoxyCode}
+
+
+\subsection*{Import}
+
+Open Eclipse, go to File -\/$>$ Import -\/$>$ General -\/$>$ Existing Projects into Workspace -\/$>$ Select \char`\"{}boilerplate-\/eclipse\char`\"{} directory created previously as root directory -\/$>$ Finish
+
+\section*{Edit}
+
+Source files may be edited under the \char`\"{}\mbox{[}\+Source Directory\mbox{]}\char`\"{} label in the Project Explorer.
+
+\subsection*{Build}
+
+To build the project, in Eclipse, unfold boilerplate-\/eclipse project in Project Explorer, unfold Build Targets, double click on \char`\"{}all\char`\"{} to build all projects.
+
+\subsection*{Run}
+
+
+\begin{DoxyEnumerate}
+\item In Eclipse, right click on the boilerplate-\/eclipse in Project Explorer, select Run As -\/$>$ Local C/\+C++ Application
+\item Choose the binaries to run (e.\+g. shell-\/app, cpp-\/test for unit testing)
+\end{DoxyEnumerate}
+
+\subsection*{Debug}
+
+
+\begin{DoxyEnumerate}
+\item Set breakpoint in source file (i.\+e. double click in the left margin on the line you want the program to break).
+\item In Eclipse, right click on the boilerplate-\/eclipse in Project Explorer, select Debug As -\/$>$ Local C/\+C++ Application, choose the binaries to run (e.\+g. shell-\/app).
+\item If prompt to \char`\"{}\+Confirm Perspective Switch\char`\"{}, select yes.
+\item Program will break at the breakpoint you set.
+\item Press Step Into (F5), Step Over (F6), Step Return (F7) to step/debug your program.
+\item Right click on the variable in editor to add watch expression to watch the variable in debugger window.
+\item Press Terminate icon to terminate debugging and press C/\+C++ icon to switch back to C/\+C++ perspetive view (or Windows-\/$>$Perspective-\/$>$Open Perspective-\/$>$C/\+C++).
+\end{DoxyEnumerate}
+
+\subsection*{Doxygen Documentation}
+
+To generate Doxygen Documentation in H\+T\+ML and La\+T\+EX, follow the next steps\+: Create a blank txt file inside a folder docs. 
+\begin{DoxyCode}
+1 cd <path to repository>
+2 mkdir <documentation\_folder\_name>
+3 cd <documentation\_folder\_name>
+4 doxygen -g <config\_file\_name>
+\end{DoxyCode}
+ Inside the configuration file, update\+: 
+\begin{DoxyCode}
+1 PROJECT\_NAME = 'your project name'
+2 INPUT = ../app ../include ../test
+\end{DoxyCode}
+ Run and generate the documents by running the next command\+: 
+\begin{DoxyCode}
+1 doxygen <config\_file\_name>
+\end{DoxyCode}
+ You can see our complete doxygen file in the path -\/ docs/html/index.\+html
+
+\subsection*{Plugins}
+
+
+\begin{DoxyItemize}
+\item Cpp\+Ch\+Eclipse
+
+To install and run cppcheck in Eclipse
+\begin{DoxyEnumerate}
+\item In Eclipse, go to Window -\/$>$ Preferences -\/$>$ C/\+C++ -\/$>$ cppcheclipse. Set cppcheck binary path to \char`\"{}/usr/bin/cppcheck\char`\"{}.
+\item To run C\+P\+P\+Check on a project, right click on the project name in the Project Explorer and choose cppcheck -\/$>$ Run cppcheck.
+\end{DoxyEnumerate}
+\item Google C++ Sytle
+
+To include and use Google C++ Style formatter in Eclipse
+\begin{DoxyEnumerate}
+\item In Eclipse, go to Window -\/$>$ Preferences -\/$>$ C/\+C++ -\/$>$ Code Style -\/$>$ Formatter. Import \href{https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-cpp-google-style.xml}{\tt eclipse-\/cpp-\/google-\/style} and apply.
+\item To use Google C++ style formatter, right click on the source code or folder in Project Explorer and choose Source -\/$>$ Format
+\end{DoxyEnumerate}
+\item Git
+
+It is possible to manage version control through Eclipse and the git plugin, but it typically requires creating another project. If you\textquotesingle{}re interested in this, try it out yourself and contact me on Canvas. 
+\end{DoxyItemize}
