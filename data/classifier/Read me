@@ -1,0 +1,3 @@
+By default - The trained classifier will be stored here and also will be read from this folder.
+
+The address - ../data/classifier/svmClassifier 
