@@ -186,6 +186,7 @@ debugger window.
 perspetive view (or Windows->Perspective->Open Perspective->C/C++).
 
 ## Doxygen Documentation
+
 To generate Doxygen Documentation in HTML and LaTEX, follow the next steps:
 Create a blank txt file inside a folder docs. 
 ```
