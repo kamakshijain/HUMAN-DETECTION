@@ -29,7 +29,7 @@
  * @copyright [2019] Sayan Brahma
  * @brief Train class implementation for training the SVM parameters using HOG descriptors
  */
-#include <train.hpp>
+#include "train.hpp"
 
 /*
  * @brief This is the constructor for the class
@@ -73,12 +73,13 @@ std::vector<float> Train::getClassifier() {
  * @param Vector containing the images whose features need to be extracted
  */
 void Train::getHOGfeatures(const cv::Size windowSize,
-                           const std::vector<cv::Mat> & imgList) {
+                           const cv::String imgType) {
     cv::HOGDescriptor hog;
     hog.winSize = windowSize;
     hog.cellSize = cv::Size(4, 4);
     cv::Mat gray;
     std::vector<float> descriptors;
+    std::vector<cv::Mat> imgList = getImgList(imgType);
     for (auto data : imgList)
         if (data.cols >= windowSize.width && data.rows >= windowSize.height) {
             // convert image to grayscale
@@ -125,6 +126,27 @@ void Train::trainSVM(const bool saveClassifier = false,
     if (saveClassifier)
         classifier->save(classifierName);
 }
+/*
+ * @brief It gives the size of the gradient list.
+ */
+int Train::getListSize() {
+    return gradientList.size();
+}
+
+/*
+ * @brief It sets the classifier for the class.
+ */
+void Train::setClassifier(const cv::Ptr<cv::ml::SVM> userClassifier) {
+    classifier = userClassifier;
+}
+
+/*
+ * @brief It returns the classifier for the class.
+ */
+cv::Ptr<cv::ml::SVM> Train::getDefaultClassifier() {
+    return classifier;
+}
+
 /**
  * @brief Destructor of the train class
  */

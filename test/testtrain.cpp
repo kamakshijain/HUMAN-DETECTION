@@ -29,53 +29,79 @@
  */
 
 #include <gtest/gtest.h>
-#include <data.hpp>
-#include <train.hpp>
-
-// Unit test for getHOGfeatures method of class Train
-TEST(TrainTest, TrainGetHOGTest) {
-  Data testData;
-  Train test;
-  testData.loadNegImages("../data/test/neg", cv::Size(200, 200));
-  test.getHOGfeatures(cv::Size(200, 200), testData.getNegImgList());
-  // Check if the gradientList is being filled
-  ASSERT_GT(test.getGradientList().size(), 0);
-}
-
-// Unit test for trainSVM method of class Train
-TEST(TrainTest, TrainSVMTest) {
-  Data testData;
-  testData.loadPosImages("../data/test/annotations", "../data/test/pos",
-                                          cv::Size(200, 200), false);
-  testData.loadNegImages("../data/test/neg", cv::Size(200, 200));
-  Train test;
-  test.getHOGfeatures(cv::Size(200, 200), testData.getPosImgList());
-  size_t posCount = test.getGradientList().size();
-  test.labels.assign(posCount, 1);
-  test.getHOGfeatures(cv::Size(200, 200), testData.getNegImgList());
-  size_t negCount = test.getGradientList().size() - posCount;
-  test.labels.insert(test.labels.end(), negCount, -1);
-  // Check if the classifier is empty initially
-  ASSERT_TRUE(test.classifier->getSupportVectors().empty());
-  test.trainSVM(false, "");
-  // Check if there is the classifier is non-empty after training
-  ASSERT_TRUE(!test.classifier->getSupportVectors().empty());
-}
+#include "train.hpp"
 
 // Unit test for getClassifier method of class Train
-TEST(TrainTest, TrainGetClassifierTest) {
-  Data testData;
-  testData.loadPosImages("../data/test/annotations", "../data/test/pos",
-                                          cv::Size(200, 200), false);
-  testData.loadNegImages("../data/test/neg", cv::Size(200, 200));
+TEST(TrainTest, getClassifierTest) {
   Train test;
-  test.getHOGfeatures(cv::Size(200, 200), testData.getPosImgList());
-  size_t posCount = test.getGradientList().size();
+  test.loadPosImages("../data/test/annotations", "../data/test/pos",
+                                          cv::Size(200, 200), false);
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  test.getHOGfeatures(cv::Size(200, 200), "positive");
+  size_t posCount = test.getListSize();
   test.labels.assign(posCount, 1);
-  test.getHOGfeatures(cv::Size(200, 200), testData.getNegImgList());
-  size_t negCount = test.getGradientList().size() - posCount;
+  test.getHOGfeatures(cv::Size(200, 200), "negative");
+  size_t negCount = test.getListSize() - posCount;
   test.labels.insert(test.labels.end(), negCount, -1);
   test.trainSVM(false, "");
   // Check if the getClassifier gives a non-empty output
-  ASSERT_NE(test.getClassifier().size(), 0);
+  ASSERT_NE(0, test.getClassifier().size());
+}
+
+// Unit test for getHOGfeatures method of class Train
+TEST(TrainTest, getHOGfeaturesTest) {
+  Train test;
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  test.getHOGfeatures(cv::Size(200, 200), "negative");
+  // Check if the gradientList is being filled
+  ASSERT_GT(test.getListSize(), 0);
+}
+
+// Unit test for trainSVM method of class Train
+TEST(TrainTest, trainSVMTest) {
+  Train test;
+  test.loadPosImages("../data/test/annotations", "../data/test/pos",
+                                          cv::Size(200, 200), false);
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  test.getHOGfeatures(cv::Size(200, 200), "positive");
+  size_t posCount = test.getListSize();
+  test.labels.assign(posCount, 1);
+  test.getHOGfeatures(cv::Size(200, 200), "negative");
+  size_t negCount = test.getListSize() - posCount;
+  test.labels.insert(test.labels.end(), negCount, -1);
+  // Check if the classifier is empty initially
+  ASSERT_TRUE(test.getDefaultClassifier()->getSupportVectors().empty());
+  test.trainSVM(false, "");
+  // Check if there is the classifier is non-empty after training
+  ASSERT_TRUE(!test.getDefaultClassifier()->getSupportVectors().empty());
+  test.trainSVM(true, "../data/test/classifier/svmClassifier");
+  Train test2;
+  test2.setClassifier(cv::ml::SVM::load
+                                    ("../data/test/classifier/svmClassifier"));
+  ASSERT_TRUE(!test2.getDefaultClassifier()->getSupportVectors().empty());
+}
+
+// Unit test for fourth method of class Train
+TEST(TrainTest, getListSizeTest) {
+  Train test;
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  test.getHOGfeatures(cv::Size(200, 200), "negative");
+  // Check if HOG features were extracted
+  ASSERT_EQ(test.getImgListSize("negative")*2, test.getListSize());
+}
+
+// Unit test for fifth method of class Train
+TEST(TrainTest, setClassifierTest) {
+  Train test;
+  cv::Ptr<cv::ml::SVM> classifier = test.getDefaultClassifier();
+  test.setClassifier(classifier);
+  // Check if the classifiers are same
+  ASSERT_TRUE(classifier == test.getDefaultClassifier());
+}
+
+// Unit test for sixth method of class Train
+TEST(TrainTest, getDefaultClassifierTest) {
+  Train test;
+  // Check if the classifier retrieved is empty
+  ASSERT_TRUE(test.getDefaultClassifier()->getSupportVectors().empty());
 }

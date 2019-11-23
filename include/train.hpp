@@ -34,16 +34,17 @@
 #include <iostream>
 #include <vector>
 #include <opencv2/opencv.hpp>
+#include "data.hpp"
 
 /*
  * @brief Train is a class
  */
-class Train {
+class Train : public Data {
 	/**
 	 * @brief Public methods and constructors declaration
 	 */
  public:
-    cv::Ptr<cv::ml::SVM> classifier;
+    
     std::vector<int> labels;
 	/**
 	 * @brief Constructor for the class Train
@@ -59,13 +60,30 @@ class Train {
      * @param The window size for HOG feature extractor
      * @param The image whose HOG features are to be extracted
      */
-    void getHOGfeatures(const cv::Size, const std::vector<cv::Mat> &);
+    void getHOGfeatures(const cv::Size, const cv::String);
     /**
      * @brief This function trains the SVM classifier from the HOG features
      * @param If we want to save the classifier after training
      * @param name of the classifier ,if to be saved
      */
     void trainSVM(const bool, const cv::String);
+    /*
+     * @brief It gives the size of the gradient list.
+     * @return This function outputs the size of the gradient list.
+     */
+    int getListSize();
+
+    /*
+     * @brief It sets the classifier for the class.
+     * @param This function takes the classifier as input.
+     */
+    void setClassifier(const cv::Ptr<cv::ml::SVM>);
+
+    /*
+     * @brief It returns the classifier for the class.
+     * @return This function returns the classifier.
+     */
+    cv::Ptr<cv::ml::SVM> getDefaultClassifier();
     /**
      * @brief Destructor of the Train class
      */
@@ -81,6 +99,7 @@ class Train {
 
  private:
     std::vector<cv::Mat> gradientList;
+    cv::Ptr<cv::ml::SVM> classifier;
 };
 
 #endif  // INCLUDE_TRAIN_HPP_
