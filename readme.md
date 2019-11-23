@@ -1,7 +1,7 @@
 # C++ Boilerplate
-[![Build Status](https://travis-ci.org/kamakshijain/HUMAN-DETECTION.svg?branch=master)](https://travis-ci.org/kamakshijain/HUMAN-DETECTION)
-[![Coverage Status](https://coveralls.io/repos/github/kamakshijain/HUMAN-DETECTION/badge.svg?branch=master)](https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=master)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/sbrahma0/HUMAN-DETECTION.svg?branch=GMock_extra_credit_sayan_brahma)](https://travis-ci.org/sbrahma0/HUMAN-DETECTION)
+[![Coverage Status](https://coveralls.io/repos/github/sbrahma0/HUMAN-DETECTION/badge.svg?branch=GMock_extra_credit_sayan_brahma)](https://coveralls.io/github/sbrahma0/HUMAN-DETECTION?branch=GMock_extra_credit_sayan_brahma)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ---
 
 ## Overview
@@ -107,6 +107,28 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+
+## Google Mock Test
+
+Google Mock Test is used to test interdependent classes. This way if the base class is changed then the tests for the derived class need not be rewritten.
+
+For this project, Google mock test has been created for class Data. IN other words, class Data has been mocked and class Train has been tested which inherits from class Data. Specifically, in class Train, method readData() calls three methods of class Data. We are testing these methods in the order of their occurence.
+
+Using Google mock macro "EXPECT_CALL", it has been checked that the loadPosImages() method is only called once. Then, it has been checked that getImgListSize() method has been called once with input "positive" and it is called after loadPosImages() method. Then, it has been checked that loadNegImages() method has been called once. At last, it has been checked that getImgListSize() method has been called once with input "negative" and it is called after loadNegImages() method.
+
+Note that, for the Google mock testing, the class dependence is different than the one in master branch. Also note, that a new class has been introduced to the algorithm.The new branch created to implement GMock has not been merged with the master branch. The dataset has also been modified i.e., the images used in this branch are different from the master branch and the extra lines which were written to provide a brief demo, has been removed since the only focus was to implement GMock.
+
+Since this branch is only for GMock implementaton so it is highly recommended to only go through the test conditions and execute the test file by the following steps.
+```
+git clone --recursive -b GMock_extra_credit_sayan_brahma https://github.com/sbrahma0/HUMAN-DETECTION.git
+cd HUMAN-DETECTION
+mkdir build
+cd build
+cmake ..
+make
+Run program: ./test/cpp-test
 ```
 
 
