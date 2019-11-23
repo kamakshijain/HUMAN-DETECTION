@@ -54,25 +54,25 @@ class Detect : public Train {
     /**
      * @brief This function toggles between the Default mode and User mode.
      */
-    void toggleMode();
+    virtual void toggleMode();
 
     /**
      * @brief This function returns the current working mode
      * @return The working mode in string type
      */
-    std::string modeName() const;
+    virtual std::string modeName() const;
     /**
      * @brief This function provides a bounding box around the humans detected
      * @param The image on which human is to be detected
      * @return A vector containing the coordinates bounding box
      */
-    std::vector<cv::Rect> findHumans(const cv::InputArray);
+    virtual std::vector<cv::Rect> findHumans(const cv::InputArray);
 
     /**
      * @brief This functions adjusts the bounding box around the humans
      * @param The bounding box detected from the detectHumans finction
      */
-    void adjustBoundingBox(cv::Rect &);
+    virtual void adjustBoundingBox(cv::Rect &);
 
     /*
      * @brief This function is used to test the trained classifier
@@ -82,13 +82,13 @@ class Detect : public Train {
      * @param mode of testing the classifier
      * @return Coordinates the bounding box based on the test results
      */
-    cv::Rect testClassifier(const cv::String, const cv::Size,
+    virtual cv::Rect testClassifier(const cv::String, const cv::Size,
                             const bool, const std::string &);
 
     /**
      * @brief Destructor of the Detect class
      */
-    ~Detect();
+    virtual ~Detect();
 private:
     /**
      * @brief Enum declaration with 2 options
