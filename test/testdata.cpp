@@ -29,17 +29,17 @@
  */
 
 #include <gtest/gtest.h>
-#include <data.hpp>
+#include "data.hpp"
 
 // Unit test loadPosImages method of class Data
-TEST(DataTest, DataLoadPosImagesTest) {
+TEST(DataTest, loadPosImagesTest) {
   Data test;
   test.loadPosImages("../data/test/annotations", "../data/test/pos",
                                           cv::Size(200, 200), false);
   // Check if the images were read
-  ASSERT_GT(test.getPosImgList().size(), 0);
+  ASSERT_GT(test.getImgListSize("positive"), 0);
   bool sizeMatch = true;
-  for (auto img : test.getPosImgList())
+  for (auto img : test.getImgList("positive"))
     if (img.size() != cv::Size(200, 200)) {
       sizeMatch = false;
       break;
@@ -49,13 +49,13 @@ TEST(DataTest, DataLoadPosImagesTest) {
 }
 
 // Unit test for loadNegImages method of class Data
-TEST(DataTest, DataLoadNegImagesTest) {
+TEST(DataTest, loadNegImagesTest) {
   Data test;
   test.loadNegImages("../data/test/neg", cv::Size(200, 200));
   // Check if the images were read
-  ASSERT_GT(test.getNegImgList().size(), 0);
+  ASSERT_GT(test.getImgListSize("negative"), 0);
   bool sizeMatch = true;
-  for (auto img : test.getNegImgList())
+  for (auto img : test.getImgList("negative"))
     if (img.size() != cv::Size(200, 200)) {
       sizeMatch = false;
       break;
@@ -63,3 +63,34 @@ TEST(DataTest, DataLoadNegImagesTest) {
   // Check if the images read have a size of 200 x 200
   ASSERT_TRUE(sizeMatch);
 }
+// Unit test for third method of class Data
+TEST(DataTest, getImgListSizeTest) {
+  Data test;
+  test.loadPosImages("../data/test/annotations", "../data/test/pos",
+                                          cv::Size(200, 200), false);
+  // check case 1 - positive
+  ASSERT_GT(test.getImgListSize("positive"), 0);
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  // check case 2 - negative
+  ASSERT_GT(test.getImgListSize("negative"), 0);
+  // check case 3
+  ASSERT_EQ(0, test.getImgListSize("null"));
+}
+
+// Unit test for fourth method of class Data
+TEST(DataTest, getImgListTest) {
+  Data test;
+  test.loadPosImages("../data/test/annotations", "../data/test/pos",
+                                          cv::Size(200, 200), false);
+  auto imgList = test.getImgList("positive");
+  // check case 1 - positive
+  ASSERT_EQ(test.getImgListSize("positive"), imgList.size());
+  test.loadNegImages("../data/test/neg", cv::Size(200, 200));
+  imgList = test.getImgList("negative");
+  // check case 2 - negative
+  ASSERT_EQ(test.getImgListSize("negative"), imgList.size());
+  imgList = test.getImgList("null");
+  // check case 3
+  ASSERT_EQ(test.getImgListSize("null"), imgList.size());
+}
+

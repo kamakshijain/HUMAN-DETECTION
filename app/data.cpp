@@ -30,7 +30,7 @@
  * @brief Implementation of the data class
  */
 
-#include <data.hpp>
+#include "data.hpp"
 
 /*
  * @brief This is the constructor for the class
@@ -112,6 +112,7 @@ void Data::loadPosImages(const cv::String anotPath, const cv::String  posDir,
                 // Check if the image is empty
                 if (img.empty()) {
                     std::cout << *k << " is invalid!" << std::endl;
+                    i++;
                     continue;
                 }
                 // Extract the human as per the annotations
@@ -174,6 +175,36 @@ void Data::loadNegImages(const cv::String dirName, const cv::Size size) {
         negImgList.push_back(img);
     }
 }
+/*
+ * @brief This is the third method of the class. It gives the size of the image list.
+ */
+int Data::getImgListSize(const cv::String str) {
+    if (str == "positive") {
+        return posImgList.size();
+    } else if (str == "negative") {
+        return negImgList.size();
+    } else {
+        std::cout << "Unexpected input to the function" << std::endl;
+        return 0;
+    }
+}
+
+/*
+ * This is the fourth method of the class. It gives the image list as an
+ * output.
+ */
+std::vector<cv::Mat> Data::getImgList(const cv::String str) {
+    if (str == "positive") {
+        return posImgList;
+    } else if (str == "negative") {
+        return negImgList;
+    } else {
+        std::cout << "Unexpected input to the function" << std::endl;
+        std::vector<cv::Mat> noImgList;
+        return noImgList;
+    }
+}
+
 
 /*
  * @brief This is the destructor for the class
