@@ -1,6 +1,6 @@
 # C++ Boilerplate
-[![Build Status](https://travis-ci.org/kamakshijain/HUMAN-DETECTION.svg?branch=master)](https://travis-ci.org/kamakshijain/HUMAN-DETECTION)
-[![Coverage Status](https://coveralls.io/repos/github/kamakshijain/HUMAN-DETECTION/badge.svg?branch=master)](https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=master)
+[![Build Status](https://travis-ci.org/kamakshijain/HUMAN-DETECTION.svg?branch=GMock_Extra_Credit_Kamakshi)](https://travis-ci.org/kamakshijain/HUMAN-DETECTION)
+[![Coverage Status](https://coveralls.io/repos/github/kamakshijain/HUMAN-DETECTION/badge.svg?branch=GMock_Extra_Credit_Kamakshi)](https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=GMock_Extra_Credit_Kamakshi)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 ---
 
@@ -79,7 +79,7 @@ pkg-config --modversion opencv
 
 ### Build
 ```
-git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
+git clone -b GMock_Extra_Credit_Kamakshi --single-branch https://github.com/kamakshijain/HUMAN-DETECTION.git
 cd <path to repository>
 mkdir build
 cd build
@@ -112,7 +112,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 
 
-## Building for code coverage (for assignments beginning in Week 4)
+## Building for code coverage
 ```
 sudo apt-get install lcov
 cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug ../
@@ -129,7 +129,7 @@ In your Eclipse workspace directory (or create a new one), checkout the repo (an
 ```
 mkdir -p ~/workspace
 cd ~/workspace
-git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
+git clone -b GMock_Extra_Credit_Kamakshi --single-branch https://github.com/kamakshijain/HUMAN-DETECTION.git
 ```
 
 In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of cpp-boilerplate
@@ -184,6 +184,32 @@ debugger window.
 
 7. Press Terminate icon to terminate debugging and press C/C++ icon to switch back to C/C++ 
 perspetive view (or Windows->Perspective->Open Perspective->C/C++).
+
+
+## Running the Program
+Go to the build directory and run the following command from the build directory:
+
+```
+cd <build folder of the module>
+./app/shell-app
+```
+## Running the GTest and GMock Tests
+Go to the build directory and run the following command from the build directory:
+```
+cd <build folder of the module>
+./test/cpp-test 
+```
+
+## Google Mock Test
+
+Google Mock Test is used to test interdependent classes and methods. This way if the base class or method is changed then the tests for the derived class need not be rewritten.
+
+For this project, Google mock test has been created for interdependent methods. In class detect, method testClassifier calls all the other four methods of the class. We are only testing the modeName() and toggleMode() methods.
+
+Using Google mock macro "EXPECT_CALL", it has been checked that the modeName() method is only called once and it returns a default value. It has also been checked that the toggleMode() method is only called once and it is called after the call to modeName() method.
+
+Note that, for the google mock testing, the classes have now been made dependent on each other with a is-a relationship.
+
 
 ## Doxygen Documentation
 
