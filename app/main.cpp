@@ -28,9 +28,21 @@
  * @copyright [2019] Sayan Brahma
  * @brief main function implementation
  */
-#include <data.hpp>
-#include <train.hpp>
-#include <detect.hpp>
+
+#include "detect.hpp"
+
+/*
+ * @brief This is a function to compare the strings (case-insensitive).
+ * @param The first parameter is the first string.
+ * @param The second parameter is the second string.
+ * @return It returns true if the strings match and false otherwise.
+ */
+bool isEqual(std::string str1, std::string str2) {
+    return std::equal(str1.begin(), str1.end(), str2.begin(), str2.end(),
+                      [](char str1, char str2) {
+                          return tolower(str1) == tolower(str2);
+                      });
+}
 
 /*
  * @brief This is the main function of the project
@@ -45,6 +57,8 @@ int main() {
 
     // Define a window size
     cv::Size windowSize = cv::Size(96, 160);
+    // Instantiate an object for class Detect
+    Detect detector;
     // Training or Testing of a classifier
     std::cout << "Do you want to Train a Classifier? " << std::endl;
     std::cout << "y option will give you a training data demo and you "
@@ -60,8 +74,7 @@ int main() {
     std::transform(trainDetector.begin(), trainDetector.end(),
                    trainDetector.begin(), ::tolower);
     // If the entered choic is yes then ...
-    if (trainDetector == "yes" || trainDetector == "y"
-            || trainDetector == "Y") {
+     if (isEqual(trainDetector, "yes") || isEqual(trainDetector, "y")) {
         // Positive Images path
         std::cout << "Give the Path for Positive Training "
          "Images else press enter " <<
@@ -90,13 +103,13 @@ int main() {
             negDir = "../data/INRIAPerson/Train/neg/";
 
         // Load positive images
-        Data allData;
         std::cout << "Loading Positive Images" << std::endl;
-        allData.loadPosImages(static_cast<cv::String>(annotationPath),
+        detector.loadPosImages(static_cast<cv::String>(annotationPath),
                             static_cast<cv::String>(posDir), windowSize, true);
         // Check if images were successfully loaded
-        if (allData.getPosImgList().size() > 0) {
-            std::cout << "Loading Positive Training Data Complete" << std::endl;
+        if (detector.getImgListSize("positive") > 0) {
+            std::cout << "Loading Positive Training Data Complete" <<
+                                                                    std::endl;
         } else {
             std::cout << "No images found. " <<
                     "Please check the Path Directory: " << posDir << std::endl;
@@ -105,9 +118,10 @@ int main() {
 
         // load negative images
         std::cout << "Loading Negative Images" << std::endl;
-        allData.loadNegImages(static_cast<cv::String>(negDir), windowSize);
-        if (allData.getNegImgList().size() > 0) {
-            std::cout << "Loading Negative Training Data Complete" << std::endl;
+        detector.loadNegImages(static_cast<cv::String>(negDir), windowSize);
+        if (detector.getImgListSize("negative") > 0) {
+            std::cout << "Loading Negative Training Data Complete" <<
+                                                                    std::endl;
         } else {
             std::cout << "No images found. " <<
                     "Please check the Path Directory: " << negDir << std::endl;
@@ -115,24 +129,24 @@ int main() {
         }
 
         // Start training
-        Train trainClass;
+       
         // For Positive Images
         std::cout << "Extracting HOG features and storing in a " <<
                      "vector for Positive Images" << std::endl;
-        trainClass.getHOGfeatures(windowSize, allData.getPosImgList());
+        detector.getHOGfeatures(windowSize, "positive");
         // Assign Positive labels
-        size_t positiveCount = trainClass.getGradientList().size();
-        trainClass.labels.assign(positiveCount, 0);
+        size_t positiveCount = detector.getListSize();
+        detector.labels.assign(positiveCount, 0);
         std::cout << "Done getting HOG Features for Positive Images" <<
                                                                 std::endl;
 
         // For Negative Images
         std::cout << "Extracting HOG features and storing in a " <<
                      "vector for Negative Images" << std::endl;
-        trainClass.getHOGfeatures(windowSize, allData.getNegImgList());
+        detector.getHOGfeatures(windowSize, "negative");
         // Assign Negative labels
-    size_t negativeCount = trainClass.getGradientList().size() - positiveCount;
-        trainClass.labels.insert(trainClass.labels.end(), negativeCount, 1);
+        size_t negativeCount = detector.getListSize() - positiveCount;
+        detector.labels.insert(detector.labels.end(), negativeCount, 1);
         std::cout << "Done getting HOG Features for Negative Images" <<
                                                                 std::endl;
 
@@ -142,7 +156,7 @@ int main() {
         getline(std::cin, saveClassifier);
         std::transform(saveClassifier.begin(), saveClassifier.end(),
                        saveClassifier.begin(), ::tolower);
-        if (saveClassifier == "yes" || saveClassifier == "y") {
+        if (isEqual(saveClassifier, "yes") || isEqual(saveClassifier, "y")) {
             // Get path for the classifier
             std::cout << "Give the Path for the Location where the " <<
             "Classifier is to be Saved (Default is set as " <<
@@ -153,10 +167,11 @@ int main() {
                 svmName = "../data/classifier/svmClassifier";
 
             // Start training the SVM classifier
-            trainClass.trainSVM(true, svmName);
-        } else if (saveClassifier == "no" || saveClassifier == "n") {
+            detector.trainSVM(true, svmName);
+        } else if (isEqual(saveClassifier, "no") ||
+                        isEqual(saveClassifier, "n")) { 
             // Start training the SVM classifier
-            trainClass.trainSVM(false, "");
+            detector.trainSVM(false, "");
         } else {
             std::cout << "Invalid Input" << std::endl;
             return 0;
@@ -164,8 +179,7 @@ int main() {
         std::cout << "Train Demo Finshed" << std::endl;
         std::cout << "The classifier is stored in "
             "../data/classifier/svmClassifier" << std::endl;
-    } else if (trainDetector == "no" || trainDetector == "n"
-          || trainDetector == "N") {
+    }  else if (isEqual(trainDetector, "no") || isEqual(trainDetector, "n")) {
         // Ask the user if Default classifier is to be used
         std::cout << "Do you want to use OpenCV's Default " <<
                      "People Detector Classifier? (y/n): ";
@@ -184,12 +198,12 @@ int main() {
                 testDir = "../data/test/pos/";
 
             // Test Classifier
-            Detect detector;
+            
             cv::Rect r = detector.testClassifier(testDir, cv::Size(),
                                                  true, "Default");
             std::cout << "Test Demo Finshed" << std::endl;
-        } else if (defaultClassifier == "no" || defaultClassifier == "n"
-             || defaultClassifier == "N") {
+        } else if (isEqual(defaultClassifier, "no") ||
+                        isEqual(defaultClassifier, "n")) {
             // Ask the user for the path to the classifier
             std::cout << "If you give a path and that is not valid, default"
             " classifier will be used" << std::endl;
@@ -209,7 +223,7 @@ int main() {
                 testDir = "../data/test/pos/";
 
             // Test Classifier
-            Detect detector;
+            
             cv::Rect r = detector.testClassifier(testDir, cv::Size(),
                                                  true, "Default");
 
