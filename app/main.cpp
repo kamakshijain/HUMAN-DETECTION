@@ -129,7 +129,6 @@ int main() {
         }
 
         // Start training
-       
         // For Positive Images
         std::cout << "Extracting HOG features and storing in a " <<
                      "vector for Positive Images" << std::endl;
@@ -169,7 +168,7 @@ int main() {
             // Start training the SVM classifier
             detector.trainSVM(true, svmName);
         } else if (isEqual(saveClassifier, "no") ||
-                        isEqual(saveClassifier, "n")) { 
+isEqual(saveClassifier, "n")) {
             // Start training the SVM classifier
             detector.trainSVM(false, "");
         } else {
@@ -198,7 +197,6 @@ int main() {
                 testDir = "../data/test/pos/";
 
             // Test Classifier
-            
             cv::Rect r = detector.testClassifier(testDir, cv::Size(),
                                                  true, "Default");
             std::cout << "Test Demo Finshed" << std::endl;
@@ -223,9 +221,8 @@ int main() {
                 testDir = "../data/test/pos/";
 
             // Test Classifier
-            
             cv::Rect r = detector.testClassifier(testDir, cv::Size(),
-                                                 true, "Default");
+                                   true, "Default");
 
 
 

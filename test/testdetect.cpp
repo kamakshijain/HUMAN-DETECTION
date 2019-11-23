@@ -35,7 +35,7 @@
 #include "detect.hpp"
 
 // Unit test for modeName method of class Detect
-TEST(DetectTest,toggleModeTest) {
+TEST(DetectTest, toggleModeTest) {
   Detect test;
   // Check if the mode is initialized to Default
   ASSERT_EQ("Default", test.modeName());
@@ -86,7 +86,6 @@ class Mock : public Detect {
  public:
   MOCK_METHOD0(toggleMode, void());
   MOCK_CONST_METHOD0(modeName, std::string());
-  
 };
 
 // Unit test for testClassifier method of class Detect
@@ -103,9 +102,6 @@ TEST(DetectTest, testClassifierTest) {
   cv::resize(img, img, cv::Size(200, 200));
   std::vector<cv::Rect> found = test.findHumans(img);
   cv::Rect &orgBox = found.front();
-  
-
- 
   cv::Rect r = test.testClassifier("../data/test/imgs", cv::Size(200, 200),
                                                             false, "User");
   // Check if the bounding box computed by the two methods are close

@@ -44,7 +44,6 @@ class Train : public Data {
 	 * @brief Public methods and constructors declaration
 	 */
  public:
-    
     std::vector<int> labels;
 	/**
 	 * @brief Constructor for the class Train

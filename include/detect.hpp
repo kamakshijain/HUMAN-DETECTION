@@ -38,7 +38,6 @@
 #include "train.hpp"
 
 class Detect : public Train {
-
     // since c++ 11 - enum name : type ;
     /**
      * @brief Public methods declaration
@@ -89,7 +88,8 @@ class Detect : public Train {
      * @brief Destructor of the Detect class
      */
     virtual ~Detect();
-private:
+
+ private:
     /**
      * @brief Enum declaration with 2 options
      */
