@@ -31,25 +31,24 @@
 
 
 #include <gtest/gtest.h>
-#include <detect.hpp>
-
-// Unit test for toggleMode method of class Detect
-TEST(DetectTest, DetectToggleTest) {
-  Detect test;
-  test.toggleMode();
-  // Check if the mode changed to User
-  ASSERT_EQ("User", test.modeName());
-}
+#include <gmock/gmock.h>
+#include "detect.hpp"
 
 // Unit test for modeName method of class Detect
-TEST(DetectTest, DetectModeNameTest) {
+TEST(DetectTest,toggleModeTest) {
+  Detect test;
+  // Check if the mode is initialized to Default
+  ASSERT_EQ("Default", test.modeName());
+}
+// Unit test for second method of class Detect
+TEST(DetectTest, modeNameTest) {
   Detect test;
   // Check if the mode is initialized to Default
   ASSERT_EQ("Default", test.modeName());
 }
 
 // Unit test for findHumans method of class Detect
-TEST(DetectTest, DetectHumansTest) {
+TEST(DetectTest, findHumansTest) {
   Detect test;
   cv::Rect orgBox(124, 26, 221, 442);  // [221 x 442 from (124, 26)]
   std::string imageName("../data/test/imgs/pedestrian_5.jpg");
@@ -68,7 +67,7 @@ TEST(DetectTest, DetectHumansTest) {
 }
 
 // Unit test for adjustBoundingBox method of class Detect
-TEST(DetectTest, DetectAdjustBoxTest) {
+TEST(DetectTest, adjustBoundingBoxTest) {
   Detect test;
   std::string imageName("../data/test/imgs/pedestrian_5.jpg");
   cv::Mat img = cv::imread(imageName);
@@ -82,14 +81,29 @@ TEST(DetectTest, DetectAdjustBoxTest) {
                               static_cast<double>(orgBox.area()) <= 0.65));
 }
 
+// Declare a mock class
+class Mock : public Detect {
+ public:
+  MOCK_METHOD0(toggleMode, void());
+  MOCK_METHOD0(modeName, const std::string());
+  
+};
+
 // Unit test for testClassifier method of class Detect
-TEST(DetectTest, DetectTestClassifierTest) {
+TEST(DetectTest, testClassifierTest) {
   Detect test;
   std::string imageName("../data/test/imgs/pedestrian_5.jpg");
   cv::Mat img = cv::imread(imageName);
   cv::resize(img, img, cv::Size(200, 200));
   std::vector<cv::Rect> found = test.findHumans(img);
   cv::Rect &orgBox = found.front();
+  
+
+  Mock mockTest;
+  EXPECT_CALL(mockTest, toggleMode())
+      .Times(0);
+  EXPECT_CALL(mockTest, modeName())
+      .Times(0);
   cv::Rect r = test.testClassifier("../data/test/imgs", cv::Size(200, 200),
                                                             false, "User");
   // Check if the bounding box computed by the two methods are close

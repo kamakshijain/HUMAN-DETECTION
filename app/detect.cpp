@@ -30,7 +30,7 @@
  * @brief Detect class implementation
  */
 #include <typeinfo>
-#include <detect.hpp>
+#include "detect.hpp"
 
 /**
  * @brief Constructor for Detect class

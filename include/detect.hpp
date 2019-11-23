@@ -35,12 +35,10 @@
 #include <vector>
 #include <string>
 #include <opencv2/opencv.hpp>
+#include "train.hpp"
 
-class Detect {
-/**
- * @brief Enum declaration with 2 options
- */
-    enum Mode { Default, User } m;
+class Detect : public Train {
+
     // since c++ 11 - enum name : type ;
     /**
      * @brief Public methods declaration
@@ -91,6 +89,11 @@ class Detect {
      * @brief Destructor of the Detect class
      */
     ~Detect();
+private:
+    /**
+     * @brief Enum declaration with 2 options
+     */
+    enum Mode { Default, User } m;
 };
 
 #endif  // INCLUDE_DETECT_HPP_
