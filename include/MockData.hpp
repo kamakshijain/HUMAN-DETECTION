@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Anirudh Topiwala
+ * Copyright (c) 2019 Sayan Brahma
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to
@@ -44,8 +44,11 @@ class MockData : public Data {
  public:
   // Create mock methods for all the methods of class Data.
   MOCK_METHOD4(loadPosImages, void(const cv::String anotPath,
-          const cv::String posDir, const cv::Size size, const bool dispImg));MOCK_METHOD2(loadNegImages, void(const cv::String negDir,
-          const cv::Size size));MOCK_METHOD1(getImgListSize, int(const std::string & str));
+          const cv::String posDir, const cv::Size size,
+const bool dispImg));
+  MOCK_METHOD2(loadNegImages, void(const cv::String negDir,
+const cv::Size size));
+  MOCK_METHOD1(getImgListSize, int(const std::string & str));
 };
 
 #endif  // INCLUDE_MOCKDATA_HPP_
