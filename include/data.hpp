@@ -64,10 +64,7 @@ class Data {
      * @param Resizing window for the image
      */
     void loadNegImages(const cv::String, const cv::Size);
-    /**
-     * @brief Destructor for data class
-     */
-    ~Data();
+
 
     const std::vector<cv::Mat>& getNegImgList() const {
     return negImgList;
@@ -100,6 +97,10 @@ class Data {
     /**
      * @brief Private variables declaration
      */
+    /**
+     * @brief Destructor for data class
+     */
+    ~Data();
  private:
     std::vector<cv::Mat> posImgList, negImgList;
 };
