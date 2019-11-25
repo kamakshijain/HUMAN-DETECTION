@@ -13,7 +13,7 @@ if (COVERAGE)
     include(CodeCoverage)
     set(LCOV_REMOVE_EXTRA "'vendor/*'")
     setup_target_for_coverage(code_coverage test/cpp-test coverage)
-    set(COVERAGE_SRCS app/main.cpp include/data.hpp include/train.hpp include/detect.hpp)
+    set(COVERAGE_SRCS app/main.cpp include/data.hpp include/train.hpp include/detect.hpp include/MockData.hpp)
 
     SET(CMAKE_CXX_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
     SET(CMAKE_C_FLAGS "-g -O0 -fprofile-arcs -ftest-coverage")
@@ -30,5 +30,4 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_subdirectory(app)
 add_subdirectory(test)
-
 add_subdirectory(vendor/googletest/googlemock)
