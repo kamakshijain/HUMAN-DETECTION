@@ -1,8 +1,10 @@
-# C++ Boilerplate
-[![Build Status](https://travis-ci.org/kamakshijain/HUMAN-DETECTION.svg?branch=master)](https://travis-ci.org/kamakshijain/HUMAN-DETECTION)
-[![Coverage Status](https://coveralls.io/repos/github/kamakshijain/HUMAN-DETECTION/badge.svg?branch=master)](https://coveralls.io/github/kamakshijain/HUMAN-DETECTION?branch=master)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+# GMock extension of the mid-term project
+[![Build Status](https://travis-ci.org/sbrahma0/HUMAN-DETECTION.svg?branch=GMock_extra_credit_sayan_brahma)](https://travis-ci.org/sbrahma0/HUMAN-DETECTION)
+[![Coverage Status](https://coveralls.io/repos/github/sbrahma0/HUMAN-DETECTION/badge.svg?branch=GMock_extra_credit_sayan_brahma)](https://coveralls.io/github/sbrahma0/HUMAN-DETECTION?branch=GMock_extra_credit_sayan_brahma)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
 ---
+
+[Click here to go to the GMock section](#google-mock-test)
 
 ## Overview
 
@@ -110,80 +112,27 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ```
 
 
+## Google Mock Test
 
+Google Mock Test is used to test interdependent classes. This way if the base class is changed then the tests for the derived class need not be rewritten.
 
-## Building for code coverage (for assignments beginning in Week 4)
+For this project, Google mock test has been created for class Data. IN other words, class Data has been mocked and class Train has been tested which inherits from class Data. Specifically, in class Train, method readData() calls three methods of class Data. We are testing these methods in the order of their occurence.
+
+Using Google mock macro "EXPECT_CALL", it has been checked that the loadPosImages() method is only called once. Then, it has been checked that getImgListSize() method has been called once with input "positive" and it is called after loadPosImages() method. Then, it has been checked that loadNegImages() method has been called once. At last, it has been checked that getImgListSize() method has been called once with input "negative" and it is called after loadNegImages() method.
+
+Note that, for the Google mock testing, the class dependence is different than the one in master branch. Also note, that a new class has been introduced to the algorithm.The new branch created to implement GMock has not been merged with the master branch. The dataset has also been modified i.e., the images used in this branch are different from the master branch and the extra lines which were written to provide a brief demo, has been removed since the only focus was to implement GMock.
+
+Since this branch is only for GMock implementaton so it is highly recommended to only go through the test conditions and execute the test file by the following steps.
 ```
-sudo apt-get install lcov
-cmake -D COVERAGE=ON -D CMAKE_BUILD_TYPE=Debug ../
+git clone --recursive -b GMock_extra_credit_sayan_brahma https://github.com/sbrahma0/HUMAN-DETECTION.git
+cd HUMAN-DETECTION
+mkdir build
+cd build
+cmake ..
 make
-make code_coverage
-```
-This generates a index.html page in the build/coverage sub-directory that can be viewed locally in a web browser.
-
-## Working with Eclipse IDE ##
-
-## Installation
-
-In your Eclipse workspace directory (or create a new one), checkout the repo (and submodules)
-```
-mkdir -p ~/workspace
-cd ~/workspace
-git clone --recursive https://github.com/kamakshijain/HUMAN-DETECTION.git
+Run program: ./test/cpp-test
 ```
 
-In your work directory, use cmake to create an Eclipse project for an [out-of-source build] of cpp-boilerplate
-
-```
-cd ~/workspace
-mkdir -p boilerplate-eclipse
-cd boilerplate-eclipse
-cmake -G "Eclipse CDT4 - Unix Makefiles" -D CMAKE_BUILD_TYPE=Debug -D CMAKE_ECLIPSE_VERSION=4.7.0 -D CMAKE_CXX_COMPILER_ARG1=-std=c++14 ../cpp-boilerplate/
-```
-
-## Import
-
-Open Eclipse, go to File -> Import -> General -> Existing Projects into Workspace -> 
-Select "boilerplate-eclipse" directory created previously as root directory -> Finish
-
-# Edit
-
-Source files may be edited under the "[Source Directory]" label in the Project Explorer.
-
-
-## Build
-
-To build the project, in Eclipse, unfold boilerplate-eclipse project in Project Explorer,
-unfold Build Targets, double click on "all" to build all projects.
-
-## Run
-
-1. In Eclipse, right click on the boilerplate-eclipse in Project Explorer,
-select Run As -> Local C/C++ Application
-
-2. Choose the binaries to run (e.g. shell-app, cpp-test for unit testing)
-
-
-## Debug
-
-
-1. Set breakpoint in source file (i.e. double click in the left margin on the line you want 
-the program to break).
-
-2. In Eclipse, right click on the boilerplate-eclipse in Project Explorer, select Debug As -> 
-Local C/C++ Application, choose the binaries to run (e.g. shell-app).
-
-3. If prompt to "Confirm Perspective Switch", select yes.
-
-4. Program will break at the breakpoint you set.
-
-5. Press Step Into (F5), Step Over (F6), Step Return (F7) to step/debug your program.
-
-6. Right click on the variable in editor to add watch expression to watch the variable in 
-debugger window.
-
-7. Press Terminate icon to terminate debugging and press C/C++ icon to switch back to C/C++ 
-perspetive view (or Windows->Perspective->Open Perspective->C/C++).
 
 ## Doxygen Documentation
 

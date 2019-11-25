@@ -1,19 +1,19 @@
-kamakshi@kamakshi-ZenBook-Pro-15-UX550GE-UX550GE:~/Documents/enpm808x/Human-detection/HUMAN-DETECTION$ cppcheck --enable=all --std=c++11 -I include/ --suppress=
-missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" ) 
+sayan@sayan-Aspire-V3-574G:~/enpm808x/HUMAN-DETECTION$ cppcheck --enable=all --std=c++11 -I include/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" )
 Checking app/data.cpp...
-1/8 files checked 19% done
+1/8 files checked 16% done
 Checking app/detect.cpp...
-2/8 files checked 35% done
+2/8 files checked 27% done
 Checking app/main.cpp...
-3/8 files checked 64% done
+3/8 files checked 49% done
 Checking app/train.cpp...
-4/8 files checked 78% done
+4/8 files checked 65% done
 Checking test/main.cpp...
-5/8 files checked 79% done
+5/8 files checked 68% done
 Checking test/testdata.cpp...
-6/8 files checked 83% done
+6/8 files checked 77% done
 Checking test/testdetect.cpp...
-7/8 files checked 92% done
+7/8 files checked 86% done
 Checking test/testtrain.cpp...
 8/8 files checked 100% done
+sayan@sayan-Aspire-V3-574G:~/enpm808x/HUMAN-DETECTION$ 
 
