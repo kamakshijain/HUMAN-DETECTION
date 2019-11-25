@@ -1,4 +1,4 @@
-# C++ Boilerplate
+# GMock extension of the mid-term project
 [![Build Status](https://travis-ci.org/sbrahma0/HUMAN-DETECTION.svg?branch=GMock_extra_credit_sayan_brahma)](https://travis-ci.org/sbrahma0/HUMAN-DETECTION)
 [![Coverage Status](https://coveralls.io/repos/github/sbrahma0/HUMAN-DETECTION/badge.svg?branch=GMock_extra_credit_sayan_brahma)](https://coveralls.io/github/sbrahma0/HUMAN-DETECTION?branch=GMock_extra_credit_sayan_brahma)
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
