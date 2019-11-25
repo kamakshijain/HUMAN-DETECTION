@@ -1,31 +1,15 @@
-kamakshi@kamakshi-ZenBook-Pro-15-UX550GE-UX550GE:~/Documents/enpm808x/Human-detection/HUMAN-DETECTION$ cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -v
-E -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
-Done processing ./app/detect.cpp
-Done processing ./app/data.cpp
-Done processing ./app/main.cpp
-Done processing ./app/train.cpp
+sayan@sayan-Aspire-V3-574G:~/enpm808x/HUMAN-DETECTION$ cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
 Done processing ./include/data.hpp
 Done processing ./include/detect.hpp
+Done processing ./include/MockData.hpp
 Done processing ./include/train.hpp
-Done processing ./test/main.cpp
-Done processing ./test/testtrain.cpp
 Done processing ./test/testdetect.cpp
 Done processing ./test/testdata.cpp
-
-
-GMock
-
-kamakshi@kamakshi-ZenBook-Pro-15-UX550GE-UX550GE:~/Documents/enpm808x/Human-detection/HUMAN-DETECTION$ cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -v
-E -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+Done processing ./test/main.cpp
+Done processing ./test/testtrain.cpp
 Done processing ./app/detect.cpp
-Done processing ./app/data.cpp
 Done processing ./app/main.cpp
 Done processing ./app/train.cpp
-Done processing ./include/data.hpp
-Done processing ./include/detect.hpp
-Done processing ./include/train.hpp
-Done processing ./test/main.cpp
-Done processing ./test/testtrain.cpp
-Done processing ./test/testdetect.cpp
-Done processing ./test/testdata.cpp
+Done processing ./app/data.cpp
+sayan@sayan-Aspire-V3-574G:~/enpm808x/HUMAN-DETECTION$ 
 
