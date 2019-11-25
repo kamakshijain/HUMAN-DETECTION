@@ -1,18 +1,18 @@
 /**
  * MIT License
- * 
+ *
  * Copyright (c) 2019 Sayan Brahma, Kamakshi Jain
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -31,24 +31,24 @@
 #include <gtest/gtest.h>
 #include "data.hpp"
 
-// Unit test loadPosImages method of class Data
+// Unit test for first method of class Data
 TEST(DataTest, loadPosImagesTest) {
   Data test;
   test.loadPosImages("../data/test/annotations", "../data/test/pos",
-                                          cv::Size(200, 200), false);
+      cv::Size(200, 200), false);
   // Check if the images were read
   ASSERT_GT(test.getImgListSize("positive"), 0);
   bool sizeMatch = true;
   for (auto img : test.getImgList("positive"))
-    if (img.size() != cv::Size(200, 200)) {
-      sizeMatch = false;
-      break;
-    }
+  if (img.size() != cv::Size(200, 200)) {
+    sizeMatch = false;
+    break;
+  }
   // Check if the images read have a size of 200 x 200
   ASSERT_TRUE(sizeMatch);
 }
 
-// Unit test for loadNegImages method of class Data
+// Unit test for second method of class Data
 TEST(DataTest, loadNegImagesTest) {
   Data test;
   test.loadNegImages("../data/test/neg", cv::Size(200, 200));
@@ -56,18 +56,19 @@ TEST(DataTest, loadNegImagesTest) {
   ASSERT_GT(test.getImgListSize("negative"), 0);
   bool sizeMatch = true;
   for (auto img : test.getImgList("negative"))
-    if (img.size() != cv::Size(200, 200)) {
-      sizeMatch = false;
-      break;
-    }
+  if (img.size() != cv::Size(200, 200)) {
+    sizeMatch = false;
+    break;
+  }
   // Check if the images read have a size of 200 x 200
   ASSERT_TRUE(sizeMatch);
 }
+
 // Unit test for third method of class Data
 TEST(DataTest, getImgListSizeTest) {
   Data test;
   test.loadPosImages("../data/test/annotations", "../data/test/pos",
-                                          cv::Size(200, 200), false);
+      cv::Size(200, 200), false);
   // check case 1 - positive
   ASSERT_GT(test.getImgListSize("positive"), 0);
   test.loadNegImages("../data/test/neg", cv::Size(200, 200));
@@ -81,7 +82,7 @@ TEST(DataTest, getImgListSizeTest) {
 TEST(DataTest, getImgListTest) {
   Data test;
   test.loadPosImages("../data/test/annotations", "../data/test/pos",
-                                          cv::Size(200, 200), false);
+      cv::Size(200, 200), false);
   auto imgList = test.getImgList("positive");
   // check case 1 - positive
   ASSERT_EQ(test.getImgListSize("positive"), imgList.size());
