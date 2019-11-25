@@ -1,18 +1,18 @@
 /**
  * MIT License
- * 
+ *
  * Copyright (c) 2019 Sayan Brahma, Kamakshi Jain
- * 
+ *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
  * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
  * copies of the Software, and to permit persons to whom the Software is
  * furnished to do so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
- * 
+ *
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -35,65 +35,99 @@
 #include <vector>
 #include <string>
 #include <opencv2/opencv.hpp>
-#include "train.hpp"
 
-class Detect : public Train {
-    // since c++ 11 - enum name : type ;
-    /**
-     * @brief Public methods declaration
-     *
-     */
- public:
-    cv::HOGDescriptor hog, hog_user;
-	/**
-	 * @brief Constructor of the class Detect
-	 */
-    Detect();
-
-    /**
-     * @brief This function toggles between the Default mode and User mode.
-     */
-    virtual void toggleMode();
-
-    /**
-     * @brief This function returns the current working mode
-     * @return The working mode in string type
-     */
-    virtual std::string modeName() const;
-    /**
-     * @brief This function provides a bounding box around the humans detected
-     * @param The image on which human is to be detected
-     * @return A vector containing the coordinates bounding box
-     */
-    virtual std::vector<cv::Rect> findHumans(const cv::InputArray);
-
-    /**
-     * @brief This functions adjusts the bounding box around the humans
-     * @param The bounding box detected from the detectHumans finction
-     */
-    virtual void adjustBoundingBox(cv::Rect &);
-
-    /*
-     * @brief This function is used to test the trained classifier
-     * @param directory address of the test set
-     * @param image size of the testing image
-     * @param Commands the method to either show or not show the images.
-     * @param mode of testing the classifier
-     * @return Coordinates the bounding box based on the test results
-     */
-    virtual cv::Rect testClassifier(const cv::String, const cv::Size,
-                            const bool, const std::string &);
-
-    /**
-     * @brief Destructor of the Detect class
-     */
-    virtual ~Detect();
-
+/*
+ * @brief Detector is a class
+ */
+class Detect {
  private:
-    /**
-     * @brief Enum declaration with 2 options
-     */
-    enum Mode { Default, User } m;
+  enum Mode {
+    Default,
+    User
+  } m;
+
+ public:
+  cv::HOGDescriptor hog, hog_user;
+
+  /*
+   * @brief This is the constructor for the class
+   *
+   * @param It does not take any input.
+   *
+   * @return It does not return any output. It just initializes the HOG
+   *         descriptors and then prints a statement.
+   */
+  Detect();
+
+  /*
+   * @brief This is the first method of the class. It toggles between the
+   *        Default mode and User mode.
+   *
+   * @param It does not take any input.
+   *
+   * @return It does not return any output. It just toggles the current mode.
+   */
+  void toggleMode();
+
+  /*
+   * @brief This is the second method of the class. It returns the name of
+   *        the current mode.
+   *
+   * @param It does not take any input.
+   *
+   * @return This method returns the mode name as a string.
+   */
+  std::string modeName() const;
+
+  /*
+   * @brief This is the third method of the class. It returns the bounding
+   *        boxes around the humans found in the image.
+   *
+   * @param This method takes an image as input.
+   *
+   * @return This method returns a vector containing the object Rect which
+   *         defines the bounding box around the detected humans.
+   */
+  std::vector<cv::Rect> findHumans(const cv::InputArray);
+
+  /*
+   * @brief This is the fourth method of the class. It adjusts the bounding
+   *        box created around a detected human.
+   *
+   * @param This method takes the bounding box detected as input.
+   *
+   * @param It does not give any output. It adjusts the bounding boxes and
+   *        the updated values are stored in the input itself which is given
+   *        as a reference.
+   */
+  void adjustBoundingBox(cv::Rect &);
+
+  /*
+   * @brief This is the fifth method of the class. It is used to test the
+   *        trained classifier.
+   *
+   * @param The first parameter defines the testDir where the testing set is
+   *        stored.
+   * @param The second parameter is the window size or the image size at
+   *        which testing is done.
+   * @param The third parameter commands the method to either show or not
+   *        show the images.
+   * @param The fourth parameter defines the mode to be used for testing the
+   *        classifier.
+   *
+   * @result This method returns the rectangle when testing.
+   */
+  cv::Rect testClassifier(const cv::String, const cv::Size, const bool,
+                          const std::string &);
+
+  /*
+   * @brief This is the destructor for the class
+   *
+   * @param It does not take any input.
+   *
+   * @return It does not return any output. It just prints a statement.
+   */
+  ~Detect();
 };
 
 #endif  // INCLUDE_DETECT_HPP_
